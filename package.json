@@ -1,0 +1,17 @@
+{
+  "name": "ts-server-tcp",
+  "version": "1.0.0",
+  "description": "Plugin for the Typescript server which enables remove tcp connections to the language server",
+  "main": "index.js",
+  "repository": "https://github.com/Ventilador/ts-server-tcp.git",
+  "author": "ventilador",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^12.0.4",
+    "typescript": "^3.5.1"
+  },
+  "scripts": {
+    "watch": "tsc -b -w"
+  }
+}

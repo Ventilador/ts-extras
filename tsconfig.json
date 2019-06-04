@@ -1,0 +1,22 @@
+{
+    "compilerOptions": {
+        "module": "es6",
+        "target": "es6",
+        "experimentalDecorators": true,
+        "moduleResolution": "node"
+    },
+    "references": [
+        {
+            "path": "plugin"
+        },
+        {
+            "path": "constants"
+        },
+        {
+            "path": "server"
+        },
+        {
+            "path": "serialization"
+        }
+    ]
+}
