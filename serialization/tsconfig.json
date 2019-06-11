@@ -1,13 +1,14 @@
 {
-    "extends": "../tsconfig.json",
+    "extends": "../tsconfig.base.json",
     "compilerOptions": {
-        "composite": true,
-        "outDir": "../dist/serialization",
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "tsBuildInfoFile": "./dist/tsbuild.info",
         "types": [
             "node"
         ]
     },
     "include": [
-        "./**/*.ts"
+        "src/**/*.ts"
     ]
 }

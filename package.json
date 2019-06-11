@@ -8,10 +8,34 @@
   "license": "MIT",
   "private": true,
   "devDependencies": {
-    "@types/node": "^12.0.4",
+    "@types/fs-extra": "^7.0.0",
+    "@types/yargs": "^13.0.0",
+    "fs-extra": "^8.0.1",
+    "ts-node": "^8.2.0",
+    "typescript": "^3.5.1",
+    "yargs": "^13.2.4"
+  },
+  "peerDependencies": {
     "typescript": "^3.5.1"
   },
   "scripts": {
-    "watch": "tsc -b -w"
-  }
+    "ts-node": "node ./bin/ts-node",
+    "play": "ts-node --transpile-only bin/playground.ts",
+    "all": "node bin/workspaces",
+    "test": "yarn ts-node ./bin/runTest.ts",
+    "watch": "tsc -b -w",
+    "compile": "tsc -b",
+    "clean": "rimraf dist node_modules",
+    "cleand": "rimraf dist",
+    "gulp": "node --inspect-brk node_modules/gulp/bin/gulp"
+  },
+  "workspaces": [
+    "constants",
+    "plugin",
+    "serialization",
+    "server",
+    "ts-shared",
+    "utils",
+    "ts-shared/tests"
+  ]
 }

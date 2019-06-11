@@ -1,10 +1,6 @@
 {
   "program": {
     "fileInfos": {
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es6.d.ts": {
-        "version": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da",
-        "signature": "c180f01a2aaac7d733001fa1db20f881dc83cf33096b674a1546ca26762e69da"
-      },
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es5.d.ts": {
         "version": "1f753cee573dea40df8a9dc873fef5566957b19ad513874f6643d8dfb14842d0",
         "signature": "1f753cee573dea40df8a9dc873fef5566957b19ad513874f6643d8dfb14842d0"
@@ -24,6 +20,14 @@
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2018.d.ts": {
         "version": "2edd3ddf436ef8e12df876dcae4ecd6a8748577944c477bf4b20d5596e0c9843",
         "signature": "2edd3ddf436ef8e12df876dcae4ecd6a8748577944c477bf4b20d5596e0c9843"
+      },
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.d.ts": {
+        "version": "0fc0f68d3f4d94aa65fab955592e4a9f2066e6f8ee2f66fcc45adf4037fc167b",
+        "signature": "0fc0f68d3f4d94aa65fab955592e4a9f2066e6f8ee2f66fcc45adf4037fc167b"
+      },
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.d.ts": {
+        "version": "1c05c805f62c1c06a60b7812cd8de2dff7a5bda2218ce5edda5d9d298b1c48e1",
+        "signature": "1c05c805f62c1c06a60b7812cd8de2dff7a5bda2218ce5edda5d9d298b1c48e1"
       },
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.dom.d.ts": {
         "version": "973df4e41aea3780ce77073777d37dd5896f684124f4c42409f3a832133837a4",
@@ -117,6 +121,22 @@
         "version": "e7780d04cd4120ee554c665829db2bbdd6b947cbaa3c150b7d9ea74df3beb2e8",
         "signature": "e7780d04cd4120ee554c665829db2bbdd6b947cbaa3c150b7d9ea74df3beb2e8"
       },
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.array.d.ts": {
+        "version": "fc7c02b980e7dda0ed14d57ee71705c09efc51ec6286a10b971a25a3bb29262b",
+        "signature": "fc7c02b980e7dda0ed14d57ee71705c09efc51ec6286a10b971a25a3bb29262b"
+      },
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.object.d.ts": {
+        "version": "989b95205f1189943fab0ce12a39c80570edf8f200aca60e0fdc500afc4d5859",
+        "signature": "989b95205f1189943fab0ce12a39c80570edf8f200aca60e0fdc500afc4d5859"
+      },
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.string.d.ts": {
+        "version": "669427ac10ef9f52b6a7a502a66670eaabba675e0a660eb971041bd73c9894e3",
+        "signature": "669427ac10ef9f52b6a7a502a66670eaabba675e0a660eb971041bd73c9894e3"
+      },
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.symbol.d.ts": {
+        "version": "7a842c21e0fe143eb3ad4d689a1470bab5ed9bc7fd7223fe8b56cbae27038d62",
+        "signature": "7a842c21e0fe143eb3ad4d689a1470bab5ed9bc7fd7223fe8b56cbae27038d62"
+      },
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.intl.d.ts": {
         "version": "f6e0c89daaf72eac38dfb1d5ef0972183f7f26a68da15bfe5bcb7cfccf0c7db8",
         "signature": "f6e0c89daaf72eac38dfb1d5ef0972183f7f26a68da15bfe5bcb7cfccf0c7db8"
@@ -125,73 +145,9 @@
         "version": "63b66918290d794f73832a6d0325be5026236674fe8c0cb0b68d162000d7bbe8",
         "signature": "63b66918290d794f73832a6d0325be5026236674fe8c0cb0b68d162000d7bbe8"
       },
-      "e:/projects/ts-server-tcp/constants/index.ts": {
-        "version": "58d46037dc27589574ee0d2c50a89a8cdacfc7706b6bd623cdec67c684d1c1b2",
-        "signature": "296764d71f45b634ad273e6f286e38d6bea019fa08cf1cb4706b0251b21a3997"
-      },
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/tsserverlibrary.d.ts": {
-        "version": "e917853063221e9a13350cb79b4aa033f5b5f7d0d852a24861e69c2d8982fba0",
-        "signature": "e917853063221e9a13350cb79b4aa033f5b5f7d0d852a24861e69c2d8982fba0"
-      },
-      "e:/projects/ts-server-tcp/plugin/index.ts": {
-        "version": "b0dd06b55d0b14656807f0d5ffa4340c508c33e36f3881d2b9ba23341a9a95f6",
-        "signature": "496fd1e30d6573926feb99641ceee6adcb051cf06d5a28be58dbc3e49b420b20"
-      },
-      "e:/projects/ts-server-tcp/serialization/types/types.ts": {
-        "version": "34964db7758f99b29207b4ba12d475beaac217984a0d212fc59160e5d0a5b5c6",
-        "signature": "34964db7758f99b29207b4ba12d475beaac217984a0d212fc59160e5d0a5b5c6"
-      },
-      "e:/projects/ts-server-tcp/serialization/decorators/serializer.ts": {
-        "version": "f34b01ce1451a9ca100a7a5f2088c7e99e2cc5515979c415d1919c158beea47e",
-        "signature": "f34b01ce1451a9ca100a7a5f2088c7e99e2cc5515979c415d1919c158beea47e"
-      },
-      "e:/projects/ts-server-tcp/serialization/parser.ts": {
-        "version": "b10b2d7882099c8ed756e7576cb79eb093d73eb605fe6d75721f9677f9a5b1f0",
-        "signature": "c74d7a57f0accb313a324e20dc46a5af62e6a2c1d90eb4f41a33129f63e92ed1"
-      },
-      "e:/projects/ts-server-tcp/serialization/decorators/move.ts": {
-        "version": "4bfd199b34f533c26e1c679c94b3a2a3e289d40aca45631e47a83a94c0995cd5",
-        "signature": "4bfd199b34f533c26e1c679c94b3a2a3e289d40aca45631e47a83a94c0995cd5"
-      },
-      "e:/projects/ts-server-tcp/serialization/decorators/reviver.ts": {
-        "version": "67d637c1366e806c8de6079fec1f505f6241b0f0edd11a81cd87614bc8e0b03e",
-        "signature": "67d637c1366e806c8de6079fec1f505f6241b0f0edd11a81cd87614bc8e0b03e"
-      },
-      "e:/projects/ts-server-tcp/serialization/decorators/serializerssingleton.ts": {
-        "version": "78ed18f6852b6b297ece15703169dce460ca95527d5dcacb5d8c174c742b3ae0",
-        "signature": "78ed18f6852b6b297ece15703169dce460ca95527d5dcacb5d8c174c742b3ae0"
-      },
-      "e:/projects/ts-server-tcp/serialization/decorators/index.ts": {
-        "version": "8339201dfe6c0cffdb58a9dbefe36eec1a29d72b0afae6811a9ee382ce177acf",
-        "signature": "8339201dfe6c0cffdb58a9dbefe36eec1a29d72b0afae6811a9ee382ce177acf"
-      },
-      "e:/projects/ts-server-tcp/serialization/types/arrayof.ts": {
-        "version": "f7e368586407cb7cb1d7a0081cda76762c4541930df054ab7e89ac7207f79ca1",
-        "signature": "8d67aad1d45f4cc1d0cea580bcc40213263c896624aa65ad7fe738e06772cecc"
-      },
-      "e:/projects/ts-server-tcp/serialization/types/bool.ts": {
-        "version": "f96004c3e781d1308559252da4f50fa04302c4629e029cac8df0517cd6fec797",
-        "signature": "34316569834d4a4e9811ee56d7b417b2b634fc8bc222654592f3f41e7f3bdae8"
-      },
-      "e:/projects/ts-server-tcp/serialization/types/f64.ts": {
-        "version": "e12f5c92309de037c8c8372af9faf9ff5bf21719a8cd797c4311dc94ff96c81c",
-        "signature": "21dd67d404f742bbb08557ba17001ea1fc274f14277eaaf1a1fe6cee5175f784"
-      },
-      "e:/projects/ts-server-tcp/serialization/types/json.ts": {
-        "version": "95c547cf7b19dc1f88ba3a5907509a052ef131470bca3088696b59cf2ae1d165",
-        "signature": "9bb60aafc8b927800db8ec7850671d0f147a640559d691917e22603e9509cec0"
-      },
-      "e:/projects/ts-server-tcp/serialization/types/thru.ts": {
-        "version": "7d5980856445a84497f4f408678065db333d44acae96ebd7a9d8a7a856537034",
-        "signature": "7d5980856445a84497f4f408678065db333d44acae96ebd7a9d8a7a856537034"
-      },
-      "e:/projects/ts-server-tcp/serialization/types/socketmessage.ts": {
-        "version": "eae572cbb98e7fde673fe9e1768c02afbaf78de50b5c105b4cd4841610bdc88a",
-        "signature": "958572972047fe11c58e1c40ae29c935690a46b34d7c286f766bb677282d9a7d"
-      },
-      "e:/projects/ts-server-tcp/server/index.ts": {
-        "version": "12feb459d68bf163537479fdf4a1f5e0af242cdff8acd723c301ebeeac7c322e",
-        "signature": "4ed407b7027ff141487893ef7e351fde6dd2a29a1e3e849b3f9ac3bc3086e153"
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.full.d.ts": {
+        "version": "b209a815904a485328677714ef8c4ddd2dcf4040154fa204d25cbf31cd4ff0f3",
+        "signature": "b209a815904a485328677714ef8c4ddd2dcf4040154fa204d25cbf31cd4ff0f3"
       },
       "e:/projects/ts-server-tcp/node_modules/@types/node/globals.d.ts": {
         "version": "3af134c0480536f901a30692d216bd29712a3869fe38a7be066ea1eef34a8561",
@@ -208,6 +164,10 @@
       "e:/projects/ts-server-tcp/node_modules/@types/node/buffer.d.ts": {
         "version": "fe892fea1e75a442fffb4a604d7eeb451e858787a9f2f01c4e83bf12a3b5048d",
         "signature": "fe892fea1e75a442fffb4a604d7eeb451e858787a9f2f01c4e83bf12a3b5048d"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/events/index.d.ts": {
+        "version": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935",
+        "signature": "400db42c3a46984118bff14260d60cec580057dc1ab4c2d7310beb643e4f5935"
       },
       "e:/projects/ts-server-tcp/node_modules/@types/node/child_process.d.ts": {
         "version": "c5a3c14cb11afb48d405562e6843145caa67c60be9738f408cd7977ce30a0b00",
@@ -368,22 +328,74 @@
       "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts": {
         "version": "765fc34423b93c2ab763670d8d11d99e5f47387c13c161d6f1640dd6d91b7d1c",
         "signature": "765fc34423b93c2ab763670d8d11d99e5f47387c13c161d6f1640dd6d91b7d1c"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl/index.d.ts": {
+        "version": "bc66144400040d98107f1c345a8f809df42f65eb259a2545d703a68c2bcd4d1b",
+        "signature": "bc66144400040d98107f1c345a8f809df42f65eb259a2545d703a68c2bcd4d1b"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/minimatch/index.d.ts": {
+        "version": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633",
+        "signature": "1d1e6bd176eee5970968423d7e215bfd66828b6db8d54d17afec05a831322633"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/glob/index.d.ts": {
+        "version": "d852d6282c8dc8156d26d6bda83ab4bde51fee05ba2fe0ecdc165ddda009d3ee",
+        "signature": "d852d6282c8dc8156d26d6bda83ab4bde51fee05ba2fe0ecdc165ddda009d3ee"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/glob-stream/index.d.ts": {
+        "version": "da1d119657295467fb030e6f6ba17011c5171d5deafd3899f448a145f36179b5",
+        "signature": "da1d119657295467fb030e6f6ba17011c5171d5deafd3899f448a145f36179b5"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl-fs/index.d.ts": {
+        "version": "0ba006a3c3dc26030785c89bc00bdd11542072029cdbc8c835560221c79eb223",
+        "signature": "0ba006a3c3dc26030785c89bc00bdd11542072029cdbc8c835560221c79eb223"
+      },
+      "e:/projects/ts-server-tcp/node_modules/chokidar/types/index.d.ts": {
+        "version": "e780502490d80e1c8aa67358175bde94ab164d44a30801215a919f557bc5430c",
+        "signature": "e780502490d80e1c8aa67358175bde94ab164d44a30801215a919f557bc5430c"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker-registry/index.d.ts": {
+        "version": "c68efdae4df1801f6ec509a8c0fbc2341e93f6632f2fce6ac2b09e4cc5eeeed2",
+        "signature": "c68efdae4df1801f6ec509a8c0fbc2341e93f6632f2fce6ac2b09e4cc5eeeed2"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker/index.d.ts": {
+        "version": "b931954d575fb0f4e94450e151d51a9b6c3851dc7d5d3385db040a4298f9ee1a",
+        "signature": "b931954d575fb0f4e94450e151d51a9b6c3851dc7d5d3385db040a4298f9ee1a"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/gulp/index.d.ts": {
+        "version": "5e6a8a22741389f36e1d47308bf03289c8e511d52be56fa4943fdaf76cea12c7",
+        "signature": "5e6a8a22741389f36e1d47308bf03289c8e511d52be56fa4943fdaf76cea12c7"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/through2/index.d.ts": {
+        "version": "831dcadae3cfa4169c306a4ba55cbf45fe969fd41ab4b94f36eb9e74d0fda1e5",
+        "signature": "831dcadae3cfa4169c306a4ba55cbf45fe969fd41ab4b94f36eb9e74d0fda1e5"
+      },
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/typescript.d.ts": {
+        "version": "a84e4f748005e815471f04da8372f96d9090381a958dfb9019436d00762cfbc6",
+        "signature": "a84e4f748005e815471f04da8372f96d9090381a958dfb9019436d00762cfbc6"
+      },
+      "e:/projects/ts-server-tcp/utils/src/index.ts": {
+        "version": "1e4599349e3f945c8b5bd263e44ab9360b4a5c03195ff038e9f8a695b911a061",
+        "signature": "2b9c342afc2f06fb87eef23ffb0b6eb615c7100d25e5aff236fa436474afb889"
+      },
+      "e:/projects/ts-server-tcp/node_modules/@types/jasmine/ts3.1/index.d.ts": {
+        "version": "c222687481343afc71025e8ec9e25a8d589c2a92e92091109af97cd063c29b50",
+        "signature": "c222687481343afc71025e8ec9e25a8d589c2a92e92091109af97cd063c29b50"
       }
     },
     "options": {
-      "composite": true,
-      "module": 5,
-      "target": 2,
       "experimentalDecorators": true,
+      "incremental": true,
+      "composite": true,
+      "module": 6,
+      "target": 8,
       "moduleResolution": 2,
-      "watch": true,
-      "configFilePath": "E:/Projects/ts-server-tcp/tsconfig.json"
+      "declaration": true,
+      "declarationMap": true,
+      "rootDir": "E:/Projects/ts-server-tcp/utils/src",
+      "outDir": "E:/Projects/ts-server-tcp/dist-utils",
+      "configFilePath": "E:/Projects/ts-server-tcp/utils/tsconfig.json"
     },
     "referencedMap": {
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es6.d.ts": [
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es5.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
@@ -401,6 +413,14 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2018.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -496,6 +516,22 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.array.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.object.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.string.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.symbol.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.intl.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
@@ -504,100 +540,7 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "e:/projects/ts-server-tcp/constants/index.ts": [
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/tsserverlibrary.d.ts": [
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/plugin/index.ts": [
-        "e:/projects/ts-server-tcp/node_modules/typescript/lib/tsserverlibrary.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/types.ts": [
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/serializer.ts": [
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/parser.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializer.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/move.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/reviver.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/serializerssingleton.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/index.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/move.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/reviver.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializer.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializerssingleton.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/arrayof.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/bool.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/f64.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/json.ts": [
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/thru.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/socketmessage.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializer.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/move.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/types/thru.d.ts",
-        "e:/projects/ts-server-tcp/serialization/types/arrayof.ts",
-        "e:/projects/ts-server-tcp/serialization/types/f64.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/server/index.ts": [
-        "e:/projects/ts-server-tcp/node_modules/@types/node/net.d.ts",
-        "e:/projects/ts-server-tcp/constants/index.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.full.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -614,6 +557,10 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "e:/projects/ts-server-tcp/node_modules/@types/node/buffer.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/events/index.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -866,13 +813,90 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/globals.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/fs.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/minimatch/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/glob/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/minimatch/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/glob-stream/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/glob/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl-fs/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/vinyl/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/glob-stream/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/chokidar/types/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/fs.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker-registry/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/undertaker-registry/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/stream.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/gulp/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/vinyl-fs/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/chokidar/types/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/undertaker/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/fs.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/stream.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/through2/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/stream.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/typescript.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/utils/src/index.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/gulp/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/through2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/path.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/stream.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/typescript/lib/typescript.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/jasmine/ts3.1/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ]
     },
     "exportedModulesMap": {
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es6.d.ts": [
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es5.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
@@ -890,6 +914,14 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2018.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -985,6 +1017,22 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.array.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.object.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.string.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.symbol.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.intl.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
@@ -993,70 +1041,9 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/tsserverlibrary.d.ts": [
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.full.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/plugin/index.ts": [
-        "e:/projects/ts-server-tcp/node_modules/typescript/lib/tsserverlibrary.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/types.ts": [
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/serializer.ts": [
-        "e:/projects/ts-server-tcp/serialization/parser.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/parser.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializer.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/move.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/reviver.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/serializerssingleton.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/decorators/index.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/move.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/reviver.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializer.d.ts",
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializerssingleton.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/arrayof.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/bool.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/f64.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/json.ts": [
-        "e:/projects/ts-server-tcp/serialization/parser.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/thru.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/types/types.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
-        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/serialization/types/socketmessage.ts": [
-        "e:/projects/ts-server-tcp/dist/serialization/decorators/serializer.d.ts"
-      ],
-      "e:/projects/ts-server-tcp/server/index.ts": [
-        "e:/projects/ts-server-tcp/node_modules/@types/node/net.d.ts"
       ],
       "e:/projects/ts-server-tcp/node_modules/@types/node/globals.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
@@ -1071,6 +1058,10 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
       "e:/projects/ts-server-tcp/node_modules/@types/node/buffer.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/events/index.d.ts": [
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ],
@@ -1323,15 +1314,88 @@
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/globals.d.ts",
         "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/fs.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/minimatch/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/glob/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/minimatch/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/glob-stream/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/glob/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl-fs/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/vinyl/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/glob-stream/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/chokidar/types/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/fs.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker-registry/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/undertaker-registry/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/stream.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/events.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/gulp/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/vinyl-fs/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/chokidar/types/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/undertaker/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/fs.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/stream.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/through2/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/stream.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/typescript.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
+      ],
+      "e:/projects/ts-server-tcp/node_modules/@types/jasmine/ts3.1/index.d.ts": [
+        "e:/projects/ts-server-tcp/node_modules/@types/node/util.d.ts",
+        "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts"
       ]
     },
     "semanticDiagnosticsPerFile": [
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es6.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es5.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2015.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2016.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2017.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2018.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.dom.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.dom.iterable.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.webworker.importscripts.d.ts",
@@ -1355,29 +1419,18 @@
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2018.intl.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2018.promise.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2018.regexp.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.array.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.object.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.string.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.es2019.symbol.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.intl.d.ts",
       "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.bigint.d.ts",
-      "e:/projects/ts-server-tcp/constants/index.ts",
-      "e:/projects/ts-server-tcp/node_modules/typescript/lib/tsserverlibrary.d.ts",
-      "e:/projects/ts-server-tcp/plugin/index.ts",
-      "e:/projects/ts-server-tcp/serialization/types/types.ts",
-      "e:/projects/ts-server-tcp/serialization/decorators/serializer.ts",
-      "e:/projects/ts-server-tcp/serialization/parser.ts",
-      "e:/projects/ts-server-tcp/serialization/decorators/move.ts",
-      "e:/projects/ts-server-tcp/serialization/decorators/reviver.ts",
-      "e:/projects/ts-server-tcp/serialization/decorators/serializerssingleton.ts",
-      "e:/projects/ts-server-tcp/serialization/decorators/index.ts",
-      "e:/projects/ts-server-tcp/serialization/types/arrayof.ts",
-      "e:/projects/ts-server-tcp/serialization/types/bool.ts",
-      "e:/projects/ts-server-tcp/serialization/types/f64.ts",
-      "e:/projects/ts-server-tcp/serialization/types/json.ts",
-      "e:/projects/ts-server-tcp/serialization/types/thru.ts",
-      "e:/projects/ts-server-tcp/serialization/types/socketmessage.ts",
-      "e:/projects/ts-server-tcp/server/index.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/lib.esnext.full.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/globals.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/assert.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/async_hooks.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/buffer.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/events/index.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/child_process.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/cluster.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/console.d.ts",
@@ -1417,7 +1470,20 @@
       "e:/projects/ts-server-tcp/node_modules/@types/node/base.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/util.d.ts",
       "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/globals.d.ts",
-      "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts"
+      "e:/projects/ts-server-tcp/node_modules/@types/node/ts3.2/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/minimatch/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/glob/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/glob-stream/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/vinyl-fs/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/chokidar/types/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker-registry/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/undertaker/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/gulp/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/through2/index.d.ts",
+      "e:/projects/ts-server-tcp/node_modules/typescript/lib/typescript.d.ts",
+      "e:/projects/ts-server-tcp/utils/src/index.ts",
+      "e:/projects/ts-server-tcp/node_modules/@types/jasmine/ts3.1/index.d.ts"
     ]
   },
   "version": "3.5.1"

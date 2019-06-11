@@ -1,0 +1,25 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "tsBuildInfoFile": "./dist/tsbuild.info",
+        "types": [
+            "node"
+        ],
+        "baseUrl": "./",
+        "paths": {
+            "@ts-utils/serialization/*": [
+                "../serialization/src/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "references": [
+        {
+            "path": "../serialization"
+        }
+    ]
+}

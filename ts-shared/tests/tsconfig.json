@@ -1,0 +1,33 @@
+{
+    "extends": "../../tsconfig.base.json",
+    "compilerOptions": {
+        "strict": true,
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "tsBuildInfoFile": "./dist/tsbuild.info",
+        "baseUrl": "./",
+        "paths": {
+            "@ts-utils/shared/*": [
+                "../src/*"
+            ],
+            "@ts-utils/serialization/*": [
+                "../../src/*"
+            ]
+        },
+        "types": [
+            "node",
+            "jasmine"
+        ]
+    },
+    "include": [
+        "./src/**/*.ts"
+    ],
+    "references": [
+        {
+            "path": "./../tsconfig.json"
+        },
+        {
+            "path": "./../../serialization/tsconfig.json"
+        }
+    ]
+}
