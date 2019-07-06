@@ -1,6 +1,8 @@
 {
-    "name": "@ts-utils/shared",
-    "version": "0.0.1",
+    "name": "@ts-extras/shared",
+    "description": "asd",
+    "keywords": ["asd"],
+    "version": "0.0.0",
     "main": "./dist/index.js",
     "private": true,
     "devDependencies": {

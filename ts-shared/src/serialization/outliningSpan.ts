@@ -1,6 +1,6 @@
 import { TextSpan } from "./textSpan";
-import { Move, Enum } from "@ts-utils/serialization";
-import { Serializer } from "@ts-utils/serialization";
+import { Move, Enum } from "@ts-extras/serialization";
+import { Serializer } from "@ts-extras/serialization";
 
 
 @Move()

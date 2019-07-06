@@ -1,7 +1,7 @@
-import { Serializer } from "@ts-utils/serialization";
+import { Serializer } from "@ts-extras/serialization";
 import { FileTextChanges } from "./fileTextChanges";
 import { CodeActionCommand } from './codeActionCommand'
-import { Move } from "@ts-utils/serialization";
+import { Move } from "@ts-extras/serialization";
 
 @Move()
 export class RefactorEditInfo extends Serializer implements ts.RefactorEditInfo {

@@ -1,5 +1,5 @@
 import *as ts from 'typescript/lib/tsserverlibrary';
-import { Returns, Method, } from '@ts-utils/serialization';
+import { Returns, Method, } from '@ts-extras/serialization';
 import { DiagnosticWithLocation } from './serialization/diagnosticWithLocation';
 import { Diagnostic } from './serialization/diagnostic';
 import { ClassifiedSpan } from './serialization/classifiedSpan';
@@ -41,7 +41,7 @@ import { ApplicableRefactorInfo } from './serialization/applicableRefactorInfo';
 import { RefactorEditInfo } from './serialization/refactorEditInfo';
 import { FileTextChanges } from './serialization/fileTextChanges';
 import { EmitOutput } from './serialization/emitOutput';
-import { Metadata } from '@ts-utils/serialization';
+import { Metadata } from '@ts-extras/serialization';
 import { SignatureHelpItemsOptions } from './serialization/signatureHelpItemsOptions';
 import { NavigateToItem } from './serialization/navigateToItem';
 import { TextRange } from './serialization/textRange';
@@ -110,8 +110,8 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
     }
 
     @Returns(CompletionEntryDetails)
-    @Method(String, Number, String, FormatCodeOptions, String, UserPreferences)
-    getCompletionEntryDetails(fileName: string, position: number, name: string, formatOptions: ts.FormatCodeOptions | FormatCodeSettings, source: string, preferences: UserPreferences): Promise<CompletionEntryDetails> {
+    @Method(String, Number, String, FormatCodeSettings, String, UserPreferences)
+    getCompletionEntryDetails(fileName: string, position: number, name: string, formatOptions: /*ts.FormatCodeOptions*/ | FormatCodeSettings, source: string, preferences: UserPreferences): Promise<CompletionEntryDetails> {
         throw new Error("Method not implemented.");
     }
 
@@ -207,7 +207,7 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
 
     @Returns([DocumentHighlights])
     @Method(String, Number, String, Boolean)
-    getNavigateToItems(searchValue: string, maxResultCount?: number, fileName?: string, excludeDtsFiles?: boolean): Promise<NavigateToItem[]> {
+    getNavigateToItems(searchValue: string, maxResultCount?: number, fileName?: string, excludeDtsFiles?: TextRange): Promise<NavigateToItem[]> {
         throw new Error("Method not implemented.");
     }
 
@@ -249,20 +249,20 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
     }
 
     @Returns([TextChange])
-    @Method(String, Number, Number, FormatCodeOptions)
-    getFormattingEditsForRange(fileName: string, start: number, end: number, options: FormatCodeOptions | FormatCodeSettings): Promise<TextChange[]> {
+    @Method(String, Number, Number, FormatCodeSettings)
+    getFormattingEditsForRange(fileName: string, start: number, end: number, options: /*FormatCodeOptions TODO |*/ FormatCodeSettings): Promise<TextChange[]> {
         throw new Error("Method not implemented.");
     }
 
     @Returns([TextChange])
-    @Method(String, FormatCodeOptions)
-    getFormattingEditsForDocument(fileName: string, options: FormatCodeOptions | FormatCodeSettings): Promise<TextChange[]> {
+    @Method(String, FormatCodeSettings)
+    getFormattingEditsForDocument(fileName: string, options: /*FormatCodeOptions TODO |*/ FormatCodeSettings): Promise<TextChange[]> {
         throw new Error("Method not implemented.");
     }
 
     @Returns([TextChange])
-    @Method(String, Number, String, FormatCodeOptions)
-    getFormattingEditsAfterKeystroke(fileName: string, position: number, key: string, options: FormatCodeOptions | FormatCodeSettings): TextChange[] | Promise<TextChange[]> {
+    @Method(String, Number, String, FormatCodeSettings)
+    getFormattingEditsAfterKeystroke(fileName: string, position: number, key: string, options: /*FormatCodeOptions TODO |*/ FormatCodeSettings): TextChange[] | Promise<TextChange[]> {
         throw new Error("Method not implemented.");
     }
 
@@ -274,7 +274,7 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
 
     @Returns(TextInsertion)
     @Method(String, Number, Number)
-    isValidBraceCompletionAtPosition(fileName: string, position: number, openingBrace: number): Promise<boolean> {
+    isValidBraceCompletionAtPosition(fileName: string, position: number, openingBrace: number): Promise<TextRange> {
         throw new Error("Method not implemented.");
     }
 
@@ -285,14 +285,14 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
     }
 
     @Returns(TextSpan)
-    @Method(String, Number, Boolean)
-    getSpanOfEnclosingComment(fileName: string, position: number, onlyMultiLine: boolean): Promise<TextSpan> {
+    @Method(String, Number, TextRange)
+    getSpanOfEnclosingComment(fileName: string, position: number, onlyMultiLine: TextRange): Promise<TextSpan> {
         throw new Error("Method not implemented.");
     }
 
     @Returns(LineAndCharacter)
     @Method(String, Number)
-    toLineColumnOffset?(fileName: string, position: number): Promise<LineAndCharacter> {
+    toLineColumnOffset(fileName: string, position: number): Promise<LineAndCharacter> {
         throw new Error("Method not implemented.");
     }
 
@@ -303,7 +303,7 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
     }
 
     @Returns(CombinedCodeActions)
-    @Method(CombinedCodeFixScope, FormatCodeSettings, UserPreferences)
+    @Method(CombinedCodeFixScope, Object, FormatCodeSettings, UserPreferences)
     getCombinedCodeFix(scope: CombinedCodeFixScope, fixId: {}, formatOptions: FormatCodeSettings, preferences: UserPreferences): Promise<CombinedCodeActions> {
         throw new Error("Method not implemented.");
     }
@@ -321,25 +321,25 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
     }
 
     @Returns(ApplyCodeActionCommandResult)
-    @Method(String, FormatCodeSettings)
+    @Method(String, Object)
     applyCodeActionCommandFile(fileName: string, action: ts.InstallPackageAction): Promise<ApplyCodeActionCommandResult> {
         throw new Error("Method not implemented.");
     }
 
     @Returns(ApplyCodeActionCommandResult)
-    @Method(String, FormatCodeSettings)
+    @Method(String, [Object])
     applyCodeActionCommandFileArray(fileName: string, action: ts.InstallPackageAction[]): Promise<ApplyCodeActionCommandResult[]> {
         throw new Error("Method not implemented.");
     }
 
     @Returns([ApplicableRefactorInfo])
-    @Method(String, Object) // TODO support OR
+    @Method(String, Object, UserPreferences) // TODO support OR
     getApplicableRefactors(fileName: string, positionOrRange: number | TextRange, preferences: UserPreferences): Promise<ApplicableRefactorInfo[]> {
         throw new Error("Method not implemented.");
     }
 
     @Returns(RefactorEditInfo)
-    @Method(String, FormatCodeSettings, Object) // TODO support OR
+    @Method(String, FormatCodeSettings, Object, String, String, UserPreferences) // TODO support OR
     getEditsForRefactor(fileName: string, formatOptions: FormatCodeSettings, positionOrRange: number | TextRange, refactorName: string, actionName: string, preferences: UserPreferences): Promise<RefactorEditInfo> {
         throw new Error("Method not implemented.");
     }
@@ -357,7 +357,7 @@ export class LanguageServerAsync implements ILanguageServiceAsync {
     }
 
     @Returns(EmitOutput)
-    @Method(String, String, Boolean)
+    @Method(String, Boolean)
     getEmitOutput(fileName: string, emitOnlyDtsFiles?: boolean): Promise<EmitOutput> {
         throw new Error("Method not implemented.");
     }
@@ -388,7 +388,7 @@ export interface ILanguageServiceAsync {
     getEncodedSyntacticClassifications(fileName: string, span: TextSpan): Promise<Classifications> | Classifications;
     getEncodedSemanticClassifications(fileName: string, span: TextSpan): Promise<Classifications> | Classifications;
     getCompletionsAtPosition(fileName: string, position: number, options: GetCompletionsAtPositionOptions | undefined): Promise<ts.WithMetadata<ts.CompletionInfo> | undefined> | ts.WithMetadata<ts.CompletionInfo> | undefined;
-    getCompletionEntryDetails(fileName: string, position: number, name: string, formatOptions: FormatCodeOptions | FormatCodeSettings | undefined, source: string | undefined, preferences: UserPreferences | undefined): Promise<CompletionEntryDetails | undefined> | CompletionEntryDetails | undefined;
+    getCompletionEntryDetails(fileName: string, position: number, name: string, formatOptions: /*FormatCodeOptions TODO |*/ FormatCodeSettings | undefined, source: string | undefined, preferences: UserPreferences | undefined): Promise<CompletionEntryDetails | undefined> | CompletionEntryDetails | undefined;
     // getCompletionEntrySymbol(fileName: string, position: number, name: string, source: string | undefined): Promise<Symbol | undefined> | Symbol | undefined;
     getQuickInfoAtPosition(fileName: string, position: number): Promise<QuickInfo | undefined> | QuickInfo | undefined;
     getNameOrDottedNameSpan(fileName: string, startPos: number, endPos: number): Promise<TextSpan | undefined> | TextSpan | undefined;
@@ -405,20 +405,20 @@ export interface ILanguageServiceAsync {
     findReferences(fileName: string, position: number): Promise<ReferencedSymbol[] | undefined> | ReferencedSymbol[] | undefined;
     getDocumentHighlights(fileName: string, position: number, filesToSearch: string[]): Promise<DocumentHighlights[] | undefined> | DocumentHighlights[] | undefined;
     getOccurrencesAtPosition(fileName: string, position: number): Promise<ReadonlyArray<ReferenceEntry> | undefined> | ReadonlyArray<ReferenceEntry> | undefined;
-    getNavigateToItems(searchValue: string, maxResultCount?: number, fileName?: string, excludeDtsFiles?: boolean): Promise<NavigateToItem[]> | NavigateToItem[];
+    getNavigateToItems(searchValue: string, maxResultCount?: number, fileName?: string, excludeDtsFiles?: TextRange): Promise<NavigateToItem[]> | NavigateToItem[];
     getNavigationBarItems(fileName: string): Promise<NavigationBarItem[]> | NavigationBarItem[];
     getNavigationTree(fileName: string): Promise<NavigationTree> | NavigationTree;
     getOutliningSpans(fileName: string): Promise<OutliningSpan[]> | OutliningSpan[];
     getTodoComments(fileName: string, descriptors: TodoCommentDescriptor[]): Promise<TodoComment[]> | TodoComment[];
     getBraceMatchingAtPosition(fileName: string, position: number): Promise<TextSpan[]> | TextSpan[];
     getIndentationAtPosition(fileName: string, position: number, options: EditorOptions): Promise<number> | number;
-    getFormattingEditsForRange(fileName: string, start: number, end: number, options: FormatCodeOptions | FormatCodeSettings): Promise<TextChange[]> | TextChange[];
-    getFormattingEditsForDocument(fileName: string, options: FormatCodeOptions | FormatCodeSettings): Promise<TextChange[]> | TextChange[];
-    getFormattingEditsAfterKeystroke(fileName: string, position: number, key: string, options: FormatCodeOptions | FormatCodeSettings): Promise<TextChange[]> | TextChange[];
+    getFormattingEditsForRange(fileName: string, start: number, end: number, options: /*FormatCodeOptions TODO |*/ FormatCodeSettings): Promise<TextChange[]> | TextChange[];
+    getFormattingEditsForDocument(fileName: string, options: /*FormatCodeOptions TODO |*/ FormatCodeSettings): Promise<TextChange[]> | TextChange[];
+    getFormattingEditsAfterKeystroke(fileName: string, position: number, key: string, options: /*FormatCodeOptions TODO |*/ FormatCodeSettings): Promise<TextChange[]> | TextChange[];
     getDocCommentTemplateAtPosition(fileName: string, position: number): Promise<TextInsertion | undefined> | TextInsertion | undefined;
-    isValidBraceCompletionAtPosition(fileName: string, position: number, openingBrace: number): Promise<boolean> | boolean;
+    isValidBraceCompletionAtPosition(fileName: string, position: number, openingBrace: number): Promise<TextRange> | TextRange;
     getJsxClosingTagAtPosition(fileName: string, position: number): Promise<JsxClosingTagInfo | undefined> | JsxClosingTagInfo | undefined;
-    getSpanOfEnclosingComment(fileName: string, position: number, onlyMultiLine: boolean): Promise<TextSpan | undefined> | TextSpan | undefined;
+    getSpanOfEnclosingComment(fileName: string, position: number, onlyMultiLine: TextRange): Promise<TextSpan | undefined> | TextSpan | undefined;
     toLineColumnOffset?(fileName: string, position: number): Promise<LineAndCharacter> | LineAndCharacter;
     getCodeFixesAtPosition(fileName: string, start: number, end: number, errorCodes: ReadonlyArray<number>, formatOptions: FormatCodeSettings, preferences: UserPreferences): Promise<ReadonlyArray<CodeFixAction>> | ReadonlyArray<CodeFixAction>;
     getCombinedCodeFix(scope: CombinedCodeFixScope, fixId: {}, formatOptions: FormatCodeSettings, preferences: UserPreferences): Promise<CombinedCodeActions> | CombinedCodeActions;

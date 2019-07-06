@@ -1,8 +1,12 @@
 import { Reader } from '../parser';
 import { ISerializer } from '../interfaces';
+import { optionalWrap } from '../decorators/moveImpl';
 const cached = Symbol('cached');
 
-export function ArrayOf<T>(serializer: ISerializer<T>): ISerializer<T[]> {
+export function ArrayOf<T>(serializer: ISerializer<T>, optional = false): ISerializer<T[]> {
+  if (optional) {
+    serializer = optionalWrap(serializer);
+  }
   if ((serializer as any)[cached]) {
     return (serializer as any)[cached];
   }
@@ -18,7 +22,7 @@ export function ArrayOf<T>(serializer: ISerializer<T>): ISerializer<T[]> {
       const preparedValues = val.map(serializer.stringify);
       return `${
         val.length // set first length of array
-      }|${
+        }|${
         // and then a pipe
         preparedValues.map(toLength).join('|') // set sizes of each item separated by a pipe
         /**
@@ -26,7 +30,7 @@ export function ArrayOf<T>(serializer: ISerializer<T>): ISerializer<T[]> {
          * (join only adds pipes between items not first nor last)
          * there is no need for separators between values either
          */
-      }|${preparedValues.join('')}`;
+        }|${preparedValues.join('')}`;
     }
   });
 }

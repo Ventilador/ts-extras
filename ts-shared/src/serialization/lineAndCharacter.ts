@@ -1,5 +1,5 @@
-import { Move } from "@ts-utils/serialization";
-import { Serializer } from "@ts-utils/serialization";
+import { Move } from "@ts-extras/serialization";
+import { Serializer } from "@ts-extras/serialization";
 
 @Move()
 export class LineAndCharacter extends Serializer implements ts.LineAndCharacter {

@@ -6,11 +6,14 @@
         "outDir": "./dist",
         "tsBuildInfoFile": "./dist/tsbuild.info",
         "paths": {
-            "@ts-utils/serialization/*": [
+            "@ts-extras/serialization/*": [
                 "../serialization/src/*"
             ],
-            "@ts-utils/shared/*": [
+            "@ts-extras/shared/*": [
                 "../ts-shared/src/*"
+            ],
+            "@ts-extras/server/*": [
+                "../ts-server/src/*"
             ]
         }
     },
@@ -23,6 +26,9 @@
         },
         {
             "path": "../ts-shared"
+        },
+        {
+            "path": "../server"
         }
     ]
 }

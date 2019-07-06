@@ -1,7 +1,7 @@
-import { Move, Enum } from "@ts-utils/serialization";
+import { Move, Enum } from "@ts-extras/serialization";
 import { SymbolDisplayPart } from "./symbolDisplayPart";
 import { CodeAction } from "./codeAction";
-import { Serializer } from "@ts-utils/serialization";
+import { Serializer } from "@ts-extras/serialization";
 import { JSDocTagInfo } from "./jSDocTagInfo";
 
 @Move()

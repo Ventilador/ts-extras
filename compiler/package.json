@@ -1,0 +1,19 @@
+{
+  "name": "@ts-extras/compiler",
+  "description": "Allows compiling typescript from other files than ts, by exposing an api to load those files(.html, .vue, etc)",
+  "keywords": [
+    "typescript",
+    "language",
+    "api",
+    "loader"
+  ],
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "private": true,
+  "devDependencies": {
+    "@types/node": "^12.0.4"
+  },
+  "bin": {
+    "tscx": "./.bin/tscx.js"
+  }
+}

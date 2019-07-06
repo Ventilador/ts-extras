@@ -1,5 +1,5 @@
 import { FileTextChanges } from "./fileTextChanges";
-import { Move, Serializer } from "@ts-utils/serialization";
+import { Move, Serializer } from "@ts-extras/serialization";
 import { CodeActionCommand } from './codeActionCommand';
 
 @Move()

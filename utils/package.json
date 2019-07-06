@@ -1,6 +1,10 @@
 {
-    "name": "@ts-utils/utils",
-    "version": "0.0.1",
+    "name": "@ts-extras/utils",
+    "description": "asd",
+    "keywords": [
+        "asd"
+    ],
+    "version": "0.0.0",
     "main": "./dist/index.js",
     "private": true,
     "devDependencies": {

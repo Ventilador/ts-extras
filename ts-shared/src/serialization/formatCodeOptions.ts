@@ -1,5 +1,5 @@
 import { FormatCodeSettings } from "./formatCodeSettings";
-import { Move } from "@ts-utils/serialization";
+import { Move } from "@ts-extras/serialization";
 
 @Move()
 export class FormatCodeOptions extends FormatCodeSettings implements ts.FormatCodeOptions {

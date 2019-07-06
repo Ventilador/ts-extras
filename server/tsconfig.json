@@ -5,14 +5,11 @@
         "outDir": "./dist",
         "baseUrl": "./src",
         "tsBuildInfoFile": "./dist/tsbuild.info",
-        "types": [
-            "node"
-        ],
         "paths": {
-            "@ts-utils/serialization/*": [
+            "@ts-extras/serialization/*": [
                 "../serialization/src/*"
             ],
-            "@ts-utils/constants/*": [
+            "@ts-extras/constants/*": [
                 "../constants/src/*"
             ]
         }

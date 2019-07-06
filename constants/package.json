@@ -1,6 +1,11 @@
 {
-    "name": "@ts-utils/constants",
-    "version": "0.0.1",
+    "name": "@ts-extras/constants",
+    "description": "This package contains some constants used across projects",
+    "keywords": [
+        "constant",
+        "ts-utils"
+    ],
+    "version": "0.0.0",
     "main": "./dist/index.js",
     "private": true
 }

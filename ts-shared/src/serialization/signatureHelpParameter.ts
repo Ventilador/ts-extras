@@ -1,5 +1,5 @@
 import { SymbolDisplayPart } from "./symbolDisplayPart";
-import { Move, Serializer } from "@ts-utils/serialization";
+import { Move, Serializer } from "@ts-extras/serialization";
 
 @Move()
 export class SignatureHelpParameter extends Serializer implements ts.SignatureHelpParameter {

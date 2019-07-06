@@ -1,6 +1,6 @@
-import { Serializer } from "@ts-utils/serialization";
+import { Serializer } from "@ts-extras/serialization";
 import { OutputFile } from "./outputFile";
-import { Move } from "@ts-utils/serialization";
+import { Move } from "@ts-extras/serialization";
 
 @Move()
 export class EmitOutput extends Serializer implements ts.EmitOutput {

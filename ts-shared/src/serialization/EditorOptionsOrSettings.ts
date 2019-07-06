@@ -1,5 +1,5 @@
-import { Serializer } from "@ts-utils/serialization";
-import { Move, Enum } from "@ts-utils/serialization";
+import { Serializer } from "@ts-extras/serialization";
+import { Move, Enum } from "@ts-extras/serialization";
 
 @Move()
 export class EditorOptions extends Serializer implements ts.EditorSettings {

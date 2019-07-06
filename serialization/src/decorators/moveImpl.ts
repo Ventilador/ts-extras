@@ -64,7 +64,7 @@ export function unwrapOptionalSerializer(value: any) {
   return value[wrappedSerializer] as ISerializer;
 }
 
-function optionalWrap(target: ISerializer): ISerializer {
+export function optionalWrap(target: ISerializer): ISerializer {
   if (target[optional]) {
     return target[optional];
   }

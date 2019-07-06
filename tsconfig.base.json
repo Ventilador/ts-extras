@@ -1,5 +1,6 @@
 {
     "compilerOptions": {
+        "stripInternal": true,
         "experimentalDecorators": true,
         "incremental": true,
         "composite": true,
@@ -8,5 +9,9 @@
         "moduleResolution": "node",
         "declaration": true,
         "declarationMap": true,
+        "types": [
+            "@ts-extras/types",
+            "node"
+        ]
     }
 }

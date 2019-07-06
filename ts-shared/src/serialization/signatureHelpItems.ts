@@ -1,6 +1,6 @@
 import { TextSpan } from "./textSpan";
 import { SignatureHelpItem } from "./signatureHelpItem";
-import { Move, Serializer } from "@ts-utils/serialization";
+import { Move, Serializer } from "@ts-extras/serialization";
 
 @Move()
 export class SignatureHelpItems extends Serializer implements ts.SignatureHelpItems {

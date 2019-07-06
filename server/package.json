@@ -1,6 +1,8 @@
 {
-    "name": "@ts-utils/server",
-    "version": "0.0.1",
+    "name": "@ts-extras/server",
+    "description": "asd",
+    "keywords": ["asd"],
+    "version": "0.0.0",
     "main": "./dist/index.js",
     "private": true
 }

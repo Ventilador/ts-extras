@@ -1,4 +1,4 @@
-import { Serializer, Move, Reader, FullJson } from "@ts-utils/serialization";
+import { Serializer, Move, Reader, FullJson } from "@ts-extras/serialization";
 
 @Move()
 export class CodeActionCommand {

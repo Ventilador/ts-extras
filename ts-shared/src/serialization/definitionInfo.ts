@@ -1,5 +1,5 @@
 import { DocumentSpan } from "./documentSpan";
-import { Move, Enum } from "@ts-utils/serialization";
+import { Move, Enum } from "@ts-extras/serialization";
 
 @Move()
 export class DefinitionInfo extends DocumentSpan implements ts.DefinitionInfo {
