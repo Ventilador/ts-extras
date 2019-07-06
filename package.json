@@ -1,9 +1,9 @@
 {
-  "name": "ts-utils",
+  "name": "ts-extras",
   "version": "1.0.0",
-  "description": "Plugin for the Typescript server which enables remove tcp connections to the language server",
+  "description": "This repo hold several different project that help developing with typescript",
   "main": "index.js",
-  "repository": "https://github.com/Ventilador/ts-utils.git",
+  "repository": "https://github.com/Ventilador/ts-extras.git",
   "author": "Ventilador",
   "license": "MIT",
   "private": true,
