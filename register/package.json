@@ -1,0 +1,15 @@
+{
+    "name": "@ts-extras/register",
+    "version": "0.0.0",
+    "description": "Enables using run typescript code with node",
+    "keywords": [
+        "node",
+        "typescript"
+    ],
+    "main": "./index.js",
+    "private": true,
+    "devDependencies": {
+        "@types/node": "^12.0.4"
+    },
+    "peerDependencies": {}
+}

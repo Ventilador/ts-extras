@@ -1,0 +1,11 @@
+{
+  "name": "@ts-extras-tests/plugin",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jasmine": "^3.3.13",
+    "@types/request-promise": "^4.1.44",
+    "jasmine": "^3.4.0"
+  }
+}

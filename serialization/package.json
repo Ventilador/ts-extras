@@ -1,6 +1,11 @@
 {
-  "name": "@ts-utils/serialization",
-  "version": "0.0.1",
+  "name": "@ts-extras/serialization",
+  "description": "Object serializer",
+  "keywords": [
+    "serialize",
+    "deserialize"
+  ],
+  "version": "0.0.0",
   "main": "./dist/index.js",
   "private": true,
   "devDependencies": {

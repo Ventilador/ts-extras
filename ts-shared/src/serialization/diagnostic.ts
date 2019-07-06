@@ -1,4 +1,4 @@
-import { Move } from "@ts-utils/serialization";
+import { Move } from "@ts-extras/serialization";
 import { DiagnosticRelatedInformation } from "./diagnosticRelatedInformation";
 
 @Move()

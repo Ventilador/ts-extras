@@ -1,0 +1,19 @@
+{
+    "compilerOptions": {
+        "experimentalDecorators": true,
+        "incremental": true,
+        "module": "commonjs",
+        "target": "es5",
+        "moduleResolution": "node",
+        "declaration": true,
+        "declarationMap": true,
+    },
+    "references": [
+        {
+            "path": "project-a"
+        },
+        {
+            "path": "project-b"
+        },
+    ]
+}

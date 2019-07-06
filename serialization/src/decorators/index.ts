@@ -1,6 +1,6 @@
 import { decorateMethod } from "./method";
 import { decorateReturn } from "./returns";
-import { MethodDecoratorType, ArgumentSerializer, ISerializer, ReturnSerializer, ProtoClass, MoveSerializer, MoveDecoratorType, MoveMethodDecoratorType } from "../interfaces";
+import { MethodDecoratorType, ArgumentSerializer, ISerializer, ReturnSerializer, MoveSerializer, MoveDecoratorType, MoveMethodDecoratorType } from "../interfaces";
 import { Thru } from "../types/thru";
 import { F64 } from "../types/f64";
 import { Bool } from "../types/bool";
@@ -9,7 +9,7 @@ export const Enum = Number;
 export { Serializer } from './serializer';
 import { Reader } from '../parser';
 import { FullJson } from "../types";
-export { collectMetadata, IMoveMetadata } from './moveImpl';
+export { collectMetadata, IMoveMetadata, unwrapOptionalSerializer, isOptionalSerializerWrapper } from './moveImpl';
 export { Metadata, MethodMetadata, IO } from './metadata';
 export function Method(...args: ArgumentSerializer[]): MethodDecoratorType {
     return function (proto: any, name: string) {

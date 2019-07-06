@@ -1,0 +1,14 @@
+{
+    "name": "@ts-extras/types",
+    "description": "This package contains some types used across projects",
+    "keywords": [
+        "types",
+        "ts-utils"
+    ],
+    "version": "0.0.0",
+    "main": "./dist/index.js",
+    "private": true,
+    "devDependencies": {
+        "source-map": "^0.7.3"
+    }
+}

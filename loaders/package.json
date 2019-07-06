@@ -1,0 +1,17 @@
+{
+    "name": "@ts-extras/loaders",
+    "description": "Loader api for the compiler and plugin",
+    "keywords": [
+        "loader",
+        "typescript",
+        "compiler",
+        "server"
+    ],
+    "version": "0.0.0",
+    "main": "./dist/index.js",
+    "private": true,
+    "devDependencies": {
+        "@types/node": "^12.0.4",
+        "source-map": "^0.7.3"
+    }
+}

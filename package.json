@@ -1,16 +1,17 @@
 {
-  "name": "ts-server-tcp",
+  "name": "ts-utils",
   "version": "1.0.0",
   "description": "Plugin for the Typescript server which enables remove tcp connections to the language server",
   "main": "index.js",
-  "repository": "https://github.com/Ventilador/ts-server-tcp.git",
-  "author": "ventilador",
+  "repository": "https://github.com/Ventilador/ts-utils.git",
+  "author": "Ventilador",
   "license": "MIT",
   "private": true,
   "devDependencies": {
     "@types/fs-extra": "^7.0.0",
     "@types/yargs": "^13.0.0",
     "fs-extra": "^8.0.1",
+    "tree-kill": "^1.2.1",
     "ts-node": "^8.2.0",
     "typescript": "^3.5.1",
     "yargs": "^13.2.4"
@@ -20,9 +21,9 @@
   },
   "scripts": {
     "ts-node": "node ./bin/ts-node",
-    "play": "ts-node --transpile-only bin/playground.ts",
+    "play": "yarn ts-node bin/playground.ts",
     "all": "node bin/workspaces",
-    "test": "yarn ts-node ./bin/runTest.ts",
+    "test": "yarn ts-node ./bin/runTest.ts dbg",
     "watch": "tsc -b -w",
     "compile": "tsc -b",
     "clean": "rimraf dist node_modules",
@@ -30,12 +31,31 @@
     "gulp": "node --inspect-brk node_modules/gulp/bin/gulp"
   },
   "workspaces": [
+    "register",
+    "compiler",
     "constants",
+    "extra-types",
+    "loaders",
+    "tree-node",
+    "mem-fs",
     "plugin",
+    "plugin/tests",
     "serialization",
     "server",
+    "server/tests",
     "ts-shared",
-    "utils",
-    "ts-shared/tests"
-  ]
+    "utils"
+  ],
+  "disabled-workspaces": [
+    "plugin",
+    "plugin/tests",
+    "serialization",
+    "server",
+    "server/tests",
+    "ts-shared",
+    "utils"
+  ],
+  "bin": {
+    "tscx": "./compiler/.bin/tscx.js"
+  }
 }

@@ -1,9 +1,12 @@
 {
-    "extends": "./tsconfig.base.json",
+    // "extends": "./tsconfig.base.json",
     "compilerOptions": {
         "noEmit": true,
         "resolveJsonModule": true
     },
+    "exclude": [
+        "**"
+    ],
     "references": [
         {
             "path": "constants"
@@ -11,20 +14,38 @@
         {
             "path": "plugin"
         },
+        // {
+        //     "path": "serialization"
+        // },
+        // {
+        //     "path": "server"
+        // },
+        // {
+        //     "path": "ts-shared"
+        // },
         {
-            "path": "serialization"
+            "path": "tree-node"
         },
         {
-            "path": "server"
+            "path": "loaders"
         },
         {
-            "path": "ts-shared"
+            "path": "deploy"
         },
         {
-            "path": "ts-shared/tests/tsconfig.json"
+            "path": "mem-fs"
         },
+        // {
+        //     "path": "server/tests/tsconfig.json"
+        // },
+        // {
+        //     "path": "plugin/tests/tsconfig.json"
+        // },
         {
-            "path": "bin"
-        }
+            "path": "compiler"
+        },
+        // {
+        //     "path": "bin"
+        // }
     ]
 }

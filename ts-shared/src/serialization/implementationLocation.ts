@@ -1,6 +1,6 @@
 import { DocumentSpan } from "./documentSpan";
 import { SymbolDisplayPart } from "./symbolDisplayPart";
-import { Move, Enum } from "@ts-utils/serialization";
+import { Move, Enum } from "@ts-extras/serialization";
 
 @Move()
 export class ImplementationLocation extends DocumentSpan implements ts.ImplementationLocation {

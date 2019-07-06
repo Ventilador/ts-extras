@@ -1,4 +1,4 @@
-import { Move, Serializer } from "@ts-utils/serialization";
+import { Move, Serializer } from "@ts-extras/serialization";
 import { TextChange } from "./textChange";
 
 @Move()

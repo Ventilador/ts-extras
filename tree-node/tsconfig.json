@@ -1,0 +1,14 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "strict": true,
+        "baseUrl": "./src",
+        "tsBuildInfoFile": "./dist/tsbuild.info",
+        "preserveConstEnums": true,
+    },
+    "include": [
+        "src/**/*.ts"
+    ]
+}

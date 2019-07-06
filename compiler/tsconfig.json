@@ -1,0 +1,36 @@
+{
+    "extends": "../tsconfig.base.json",
+    "compilerOptions": {
+        "rootDir": "./src",
+        "outDir": "./dist",
+        "strict": true,
+        "baseUrl": "./src",
+        "tsBuildInfoFile": "./dist/tsbuild.info",
+        "preserveConstEnums": true,
+        "paths": {
+            "@ts-extras/loaders/*": [
+                "../loaders/src/*"
+            ],
+            "@ts-extras/types/*": [
+                "../extra-types/*"
+            ],
+            "@ts-extras/mem-fs/*": [
+                "../mem-fs/*"
+            ]
+        }
+    },
+    "include": [
+        "src/**/*.ts"
+    ],
+    "references": [
+        {
+            "path": "../loaders/"
+        },
+        {
+            "path": "../mem-fs"
+        },
+        {
+            "path": "../extra-types"
+        }
+    ]
+}

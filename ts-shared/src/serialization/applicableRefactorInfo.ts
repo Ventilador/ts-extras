@@ -1,6 +1,6 @@
-import { Move } from "@ts-utils/serialization";
+import { Move } from "@ts-extras/serialization";
 import { RefactorActionInfo } from "./refactorActionInfo";
-import { Serializer } from "@ts-utils/serialization";
+import { Serializer } from "@ts-extras/serialization";
 
 @Move()
 export class ApplicableRefactorInfo extends Serializer implements ts.ApplicableRefactorInfo {

@@ -1,12 +1,12 @@
 
 import { createServer } from 'net';
-import { TCP_PORT } from '@ts-utils/constants';
-import { messageJoiner } from '@ts-utils/serialization';
+import { TCP_PORT } from '@ts-extras/constants';
+import { messageJoiner } from '@ts-extras/serialization';
 
-export function createTcpListener(onConnection: (value: any) => void, port?: number) {
+export function createTcpListener(onConnection: (value: Buffer, write: (chunk: string | Buffer) => void) => void) {
     return createServer((socket) => {
         messageJoiner(socket, onConnection);
-    }).listen(port || TCP_PORT);
+    }).listen(TCP_PORT);
 }
 
 

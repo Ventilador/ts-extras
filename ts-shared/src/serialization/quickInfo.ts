@@ -1,6 +1,6 @@
 import { SymbolDisplayPart } from "./symbolDisplayPart";
 import { TextSpan } from "./textSpan";
-import { Move, Serializer } from "@ts-utils/serialization";
+import { Move, Serializer } from "@ts-extras/serialization";
 import { JSDocTagInfo } from "./jSDocTagInfo";
 
 @Move()

@@ -1,5 +1,5 @@
-import { Serializer } from "@ts-utils/serialization";
-import { Move, Enum } from "@ts-utils/serialization";
+import { Serializer } from "@ts-extras/serialization";
+import { Move, Enum } from "@ts-extras/serialization";
 import { DiagnosticMessageChain } from "./diagnosticMessageChain";
 import { SourceFile } from "./sourceFile";
 import { Diagnostic } from "./diagnostic";

@@ -1,4 +1,4 @@
-import { Move, Serializer } from '@ts-utils/serialization';
+import { Move, Serializer } from '@ts-extras/serialization';
 
 @Move()
 export class FormatCodeSettings extends Serializer implements ts.FormatCodeSettings {

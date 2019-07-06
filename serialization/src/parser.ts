@@ -1,5 +1,5 @@
 const valueFn = (val: any) => () => val;
-
+const emptyBuf = Buffer.from('');
 export class Reader {
   // tslint:disable-next-line
   public static readonly Empty: Reader = createEmpty(Reader);
@@ -12,6 +12,18 @@ export class Reader {
     this.size = size || Buffer.byteLength(this.text);
   }
 
+  bufSlice(amount: number) {
+    if (!amount) {
+      return emptyBuf;
+    }
+    if (this.index + amount <= this.size) {
+      const other = this.text.slice(this.index, this.index + amount);
+      this.index += amount;
+      return other;
+    }
+    
+    throw new Error('Out of bounds');
+  }
   toString() {
     return this.text.toString('utf8', this.index, this.size);
   }

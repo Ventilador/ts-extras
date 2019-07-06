@@ -1,8 +1,8 @@
 import { SymbolDisplayPart } from "./symbolDisplayPart";
 import { JSDocTagInfo } from "./jSDocTagInfo";
 import { SignatureHelpParameter } from "./signatureHelpParameter";
-import { Move } from "@ts-utils/serialization";
-import { Serializer } from "@ts-utils/serialization";
+import { Move } from "@ts-extras/serialization";
+import { Serializer } from "@ts-extras/serialization";
 
 @Move()
 export class SignatureHelpItem extends Serializer implements ts.SignatureHelpItem {
