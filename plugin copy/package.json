@@ -1,0 +1,12 @@
+{
+    "name": "@ts-extras/plugin",
+    "description": "Exposes the typescript plugin api with the ability to load external files",
+    "keywords": [
+        "typescript",
+        "server",
+        "plugin"
+    ],
+    "version": "0.0.0",
+    "main": "./dist/index.js",
+    "private": true
+}

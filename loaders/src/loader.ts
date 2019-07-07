@@ -1,5 +1,6 @@
 import { loaders } from '@ts-extras/types';
 import { D_TS_EXTENSION, JS_EXTENSION, MAP_EXTENSION, TS_EXTENSION, MAP_D_TS_EXTENSION } from '@ts-extras/constants';
+import { LineAndCharacter } from 'typescript';
 export function createLoader({ redirect: redirector, extension, parse, emit }: loaders.LoaderExport): loaders.Loader {
     const handles = createExtensionChecker(extension);
     const wasRedirected = createFileSlicer(extension, TS_EXTENSION);
@@ -21,7 +22,41 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
         readContent,
         wasRedirected,
         emit: emitter,
+        moveFile,
+        movePosition,
+        moveLineAndChar,
+        toRedirected,
     };
+
+    function toRedirected(fileName: string) {
+        return fileName + TS_EXTENSION;
+    }
+
+    function moveLineAndChar(from: string, to: string, info: LineAndCharacter) {
+        return info;
+    }
+
+    function moveFile(from: string, to: string, fileName: string): string {
+        if (handles(from)) {
+            return toRedirected(fileName);
+        } else if (handles(to)) {
+            return wasRedirected(fileName) || fileName;
+        }
+
+        throw new Error(`Does not handles either file names "${from}" "${to}"`);
+    }
+
+    function movePosition(from: string, to: string, pos: number): number {
+        if (handles(from)) {
+            const item = cache.get(from);
+            return pos - item!.span.start;
+        } else if (handles(to)) {
+            const item = cache.get(to);
+            return item!.span.start + pos;
+        }
+
+        throw new Error(`Does not handles either file names "${from}" "${to}"`);
+    }
 
     function readContent(from: string, to: string, content: string): string {
         const result = parse(redirector ? to : from, content);
@@ -32,7 +67,7 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
         if (redirector && redirector(fileName, addFile)) {
             return true;
         }
-        addFile(fileName, fileName + TS_EXTENSION);
+        addFile(fileName, toRedirected(fileName));
         return true;
     }
 }

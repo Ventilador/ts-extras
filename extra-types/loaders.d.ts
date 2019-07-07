@@ -1,4 +1,4 @@
-import { TextRange, FileTextChanges, TextChange, } from 'typescript';
+import { TextRange, FileTextChanges, TextChange, LineAndCharacter } from 'typescript';
 export namespace loaders {
 	export type AugPackageJson = {
 		tsLoaders: PackageJsonConfigPath | PackageJsonConfigPath[];
@@ -67,6 +67,11 @@ export namespace loaders {
          *          you can also add files, and return false|undefined, to let the default file be loaded as well (not exclusive behavior)
          */
 		redirect: (fileName: string, addFile: (from: string, to: string) => void) => true | false | undefined;
+		movePosition: (from: string, to: string, pos: number) => number;
+		moveFile: (from: string, to: string, fileName: string) => string;
+		moveLineAndChar: (from: string, to: string, fileName: LineAndCharacter) => LineAndCharacter;
+		toRedirected: (fileName: string) => string;
+		outOfBounds(from: string, to: string, pos: number | TextRange): boolean;
 	}
 	export type MappedFile = {
 		readonly originalPath: string;

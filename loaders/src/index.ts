@@ -1,6 +1,7 @@
 import { resolve, dirname } from "path";
 import { loaders } from "@ts-extras/types";
 import { createLoader } from "./loader";
+export { createLoader } from "./loader";
 let doRegister = function register() {
     require('@ts-extras/register')(require('typescript'));
     doRegister = () => { };

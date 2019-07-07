@@ -39,7 +39,6 @@
     "tree-node",
     "mem-fs",
     "plugin",
-    "plugin/tests",
     "serialization",
     "server",
     "server/tests",
@@ -47,8 +46,6 @@
     "utils"
   ],
   "disabled-workspaces": [
-    "plugin",
-    "plugin/tests",
     "serialization",
     "server",
     "server/tests",
