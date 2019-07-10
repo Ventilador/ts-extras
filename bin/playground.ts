@@ -6,19 +6,13 @@ const { readdir, writeFile, readFile } = promises;
 readdirSync("plugin/src/methods")
     .forEach(file => {
         const content = readFileSync(join("plugin/src/methods", file), 'utf8');
-        const lines = content.split(/\n/g)
-            .filter(i => !i.includes('./../tsUtils'))
+        const lines = content.split(/\r\n/g)
             .map(i => {
-                if (i.includes('synchronize()')) {
-                    return '';
+                if (i.includes('if (handles(')) {
+                    return 'debugger;' + i;
                 }
-
                 return i;
             })
-            .map(i => i.replace('calculatePosition({ from: fileName, to: toTsFile(fileName) }', 'movePosition(fileName, newFileName'))
-            .map(i => i.replace('calculatePosition', 'movePosition'))
-            .map(i => i.replace('isVueFile', 'handles'))
-            .map(i => i.replace('toTsFile', 'toRedirected'))
             .join('\r\n');
-        console.log(lines)
+        writeFile(join("plugin/src/methods", file), lines);
     })

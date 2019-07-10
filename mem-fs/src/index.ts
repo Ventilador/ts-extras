@@ -142,14 +142,18 @@ function watchInternal(walk: Walker<FsItem<any>, fs.Events>, path: string, cb: f
 let debouncer: NodeJS.Timer | null = null;
 let queue: [Node<any, any>, FsEvent][] = [];
 function addWatcher(node: Node<any, any>) {
-    return fsWatch(node.fullPath, function (event: any) {
-        queue.push([node, event]);
-        if (debouncer) {
-            clearTimeout(debouncer);
-        }
+    try {
+        return fsWatch(node.fullPath, function (event: any) {
+            queue.push([node, event]);
+            if (debouncer) {
+                clearTimeout(debouncer);
+            }
 
-        debouncer = setTimeout(flushQueue, 1000);
-    });
+            debouncer = setTimeout(flushQueue, 1000);
+        });
+    } catch{
+        return { close: noop } as any
+    }
 }
 type ReducerMapT = [Node<any, any>, FsEvent];
 type DefaultNode = Node<any, any>
@@ -270,7 +274,8 @@ function directoryExistsInternal(walk: Walker<FsItem<any>, fs.Events>, path: str
 
 function writeVirtualFileInternal(walk: Walker<FsItem<any>, fs.Events>, fromPath: string, toPath: string, parser: (content: string) => string) {
     const toNode = walk(toPath);
-    if (toNode.getContent()) {
+    const content = toNode.getContent();
+    if (content && !isNonExistingContent(content)) {
         return;
     }
 

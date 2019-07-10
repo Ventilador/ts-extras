@@ -1,19 +1,18 @@
 import { LanguageService, TextSpan } from "typescript/lib/tsserverlibrary";
-import { UtilsSync } from "./../tsUtils"; import { Mappers } from "./../mappers";
+import { Mappers } from "../mappers";
 export function getSpanOfEnclosingCommentFactory(
     lang: LanguageService,
-    { isVueFile, synchronize, toTsFile, calculatePosition }: UtilsSync,
-    { outTextSpan }: Mappers
+    { handles, toRedirected, movePosition, mapTextSpan }: Mappers
 ): LanguageService['getSpanOfEnclosingComment'] {
     return function (fileName: string, position: number, onlyMultiLine: boolean): TextSpan | undefined {
         debugger;
-        if (isVueFile(fileName)) {
-            synchronize();
-            const newFileName = toTsFile(fileName);
-            const newPosition = calculatePosition({ from: fileName, to: toTsFile(fileName) }, position);
+debugger;        if (handles(fileName)) {
+
+            const newFileName = toRedirected(fileName);
+            const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getSpanOfEnclosingComment(newFileName, newPosition, onlyMultiLine);
             if (result) {
-                return outTextSpan(fileName, result);
+                return mapTextSpan(newFileName, fileName, result);
             }
             return result;
         }

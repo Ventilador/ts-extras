@@ -1,17 +1,15 @@
 import { LanguageService, TodoComment, TodoCommentDescriptor } from "typescript/lib/tsserverlibrary";
-import { Utils, UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function getTodoCommentsFactory
     (lang: LanguageService,
-        { isVueFile, synchronize, toTsFile, calculatePosition }: UtilsSync,
-        { outTodoComment }: Mappers): LanguageService['getTodoComments'] {
+        { handles, toRedirected, mapTodoComment }: Mappers): LanguageService['getTodoComments'] {
     return function (fileName: string, descriptors: TodoCommentDescriptor[]): TodoComment[] {
         debugger;
-        if (isVueFile(fileName)) {
-            synchronize();
-            const result = lang.getTodoComments(toTsFile(fileName), descriptors);
+debugger;        if (handles(fileName)) {
+            const newFileName = toRedirected(fileName);
+            const result = lang.getTodoComments(newFileName, descriptors);
             if (result.length) {
-                return result.map(outTodoComment, fileName);
+                return result.map(i => mapTodoComment(newFileName, fileName, i));
             }
             return result;
         }

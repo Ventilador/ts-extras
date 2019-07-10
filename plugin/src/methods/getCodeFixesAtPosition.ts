@@ -5,7 +5,7 @@ export function getCodeFixesAtPositionFactory(
     { mapCodeFixAction, handles, toRedirected, movePosition }: Mappers
 ): LanguageService['getCodeFixesAtPosition'] {
     return function (fileName: string, start: number, end: number, errorCodes: ReadonlyArray<number>, formatOptions: FormatCodeSettings, preferences: UserPreferences): ReadonlyArray<CodeFixAction> {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newStart = movePosition(fileName, newFileName, start);
             const newEnd = movePosition(fileName, newFileName, end);

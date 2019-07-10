@@ -1,19 +1,17 @@
 import { LanguageService, SelectionRange } from "typescript/lib/tsserverlibrary";
-import { UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function getSmartSelectionRangeFactory(
     lang: LanguageService,
-    { isVueFile, synchronize, toTsFile, calculatePosition }: UtilsSync,
-    { outSelectionRange }: Mappers
+    { handles, toRedirected, movePosition, mapSelectionRange }: Mappers
 ): LanguageService['getSmartSelectionRange'] {
     return function (fileName: string, position: number): SelectionRange {
-        if (isVueFile(fileName)) {
-            synchronize();
-            const newFileName = toTsFile(fileName);
-            const newPosition = calculatePosition({ from: fileName, to: toTsFile(fileName) }, position);
+debugger;        if (handles(fileName)) {
+
+            const newFileName = toRedirected(fileName);
+            const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getSmartSelectionRange(newFileName, newPosition);
             if (result) {
-                return outSelectionRange(fileName, result);
+                return mapSelectionRange(newFileName, fileName, result);
             }
             return result;
         }

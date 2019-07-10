@@ -6,7 +6,7 @@ export function getEncodedSemanticClassificationsFactory(
 ): LanguageService['getEncodedSemanticClassifications'] {
     return function (fileName: string, span: TextSpan): Classifications {
         debugger;
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newSpan = mapTextSpan(fileName, newFileName, span);
             const result = lang.getEncodedSemanticClassifications(newFileName, newSpan);

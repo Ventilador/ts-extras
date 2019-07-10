@@ -1,6 +1,9 @@
 import { loaders } from '@ts-extras/types';
 import { D_TS_EXTENSION, JS_EXTENSION, MAP_EXTENSION, TS_EXTENSION, MAP_D_TS_EXTENSION } from '@ts-extras/constants';
-import { LineAndCharacter } from 'typescript';
+import { LineAndCharacter, TextRange } from 'typescript';
+
+type InternalMappingFileInfo = loaders.MappingFileInfo & { end: number, size: number };
+const cache = new Map<string, InternalMappingFileInfo>();
 export function createLoader({ redirect: redirector, extension, parse, emit }: loaders.LoaderExport): loaders.Loader {
     const handles = createExtensionChecker(extension);
     const wasRedirected = createFileSlicer(extension, TS_EXTENSION);
@@ -8,7 +11,6 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
     const getJsOutputFileName = createFileSlicer(extension, JS_EXTENSION);
     const getSourceMapFileName = createFileSlicer(extension, MAP_EXTENSION);
     const getDTsSourceMapFileName = createFileSlicer(extension, MAP_D_TS_EXTENSION);
-    const cache = new Map<string, loaders.MappingFileInfo>();
     const emitter = emit ? createEmitter(cache, emit) : defaultEmitter;
     return {
         multiFile: false,
@@ -26,7 +28,36 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
         movePosition,
         moveLineAndChar,
         toRedirected,
+        movePositionWithinFile,
+        outOfBounds,
     };
+
+    function outOfBounds(from: string, to: string, pos: number | TextRange): boolean {
+        if (typeof pos === 'number') {
+            if (handles(from)) {
+                const { span: { start }, end } = cache.get(from)!;
+                return !isBetween(pos, 0, end - start);
+            } else if (handles(to)) {
+                const { span: { start }, end } = cache.get(to)!;
+                return !isBetween(pos, start, end);
+            }
+            return false;
+        } else {
+            return outOfBounds(from, to, pos.end) || outOfBounds(from, to, pos.pos);
+        }
+    }
+
+    function movePositionWithinFile(from: string, to: string, pos: number): number {
+        if (handles(from)) {
+            const { span: { start }, end } = cache.get(from)!;
+            return between(pos - start, start, end);
+        } else if (handles(to)) {
+            const { span: { start }, end } = cache.get(to)!;
+            return between(start + pos, start, end);
+        }
+
+        throw new Error(`Does not handles either file names "${from}" "${to}"`);
+    }
 
     function toRedirected(fileName: string) {
         return fileName + TS_EXTENSION;
@@ -48,11 +79,11 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
 
     function movePosition(from: string, to: string, pos: number): number {
         if (handles(from)) {
-            const item = cache.get(from);
-            return pos - item!.span.start;
+            const item = cache.get(from)!;
+            return pos - item.span.start;
         } else if (handles(to)) {
-            const item = cache.get(to);
-            return item!.span.start + pos;
+            const item = cache.get(to)!;
+            return item.span.start + pos;
         }
 
         throw new Error(`Does not handles either file names "${from}" "${to}"`);
@@ -60,7 +91,7 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
 
     function readContent(from: string, to: string, content: string): string {
         const result = parse(redirector ? to : from, content);
-        cache.set(from, result);
+        cache.set(from, extendMapping(result));
         return result.newText;
     }
     function redirect(fileName: string, addFile: (fileName: string, to: string) => void) {
@@ -70,6 +101,26 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
         addFile(fileName, toRedirected(fileName));
         return true;
     }
+}
+function extendMapping(value: loaders.MappingFileInfo): InternalMappingFileInfo {
+    return Object.assign(value, {
+        end: value.span.start + value.span.length,
+        size: value.oldText.length
+    })
+}
+function isBetween(value: number, min: number, max: number) {
+    return !(value < min || value > max);
+}
+function between(value: number, min: number, max: number): number {
+    if (value < min) {
+        return min;
+    }
+
+    if (value > max) {
+        return max;
+    }
+
+    return value;
 }
 
 function createEmitter(cache: Map<string, loaders.MappingFileInfo>, emit: loaders.LoaderExport['emit']) {

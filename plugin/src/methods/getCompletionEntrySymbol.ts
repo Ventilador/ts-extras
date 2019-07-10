@@ -6,7 +6,7 @@ export function getCompletionEntrySymbolFactory(
 ): LanguageService['getCompletionEntrySymbol'] {
     return function (fileName: string, position: number, name: string, source: string | undefined): Symbol | undefined {
         debugger;
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
 
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);

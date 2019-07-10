@@ -2,19 +2,19 @@ import { FormatCodeOptions, FormatCodeSettings, LanguageService, TextChange } fr
 import { Mappers } from "./../mappers";
 export function getFormattingEditsForRangeFactory(
     lang: LanguageService,
-    { handles }: Mappers
+    { handles, toRedirected, movePositionWithinFile, mapTextChange }: Mappers
 ): LanguageService['getFormattingEditsForRange'] {
     return function (fileName: string, start: number, end: number, options: FormatCodeOptions | FormatCodeSettings): TextChange[] {
-        if (isVueFile(fileName)) {
-            synchronize();
-            const newFileName = toTsFile(fileName);
+debugger;        if (handles(fileName)) {
+
+            const newFileName = toRedirected(fileName);
             let result: TextChange[];
-            const newStart = Math.max(calculatePosition({ from: fileName, to: toTsFile(fileName) }, start), 0);
-            const newEnd = Math.min(calculatePosition({ from: fileName, to: toTsFile(fileName) }, end), getEnd(fileName));
+            const newStart = movePositionWithinFile(fileName, newFileName, start);
+            const newEnd = movePositionWithinFile(fileName, newFileName, end);
             result = lang.getFormattingEditsForRange(newFileName, newStart, newEnd, options);
 
             if (result.length) {
-                result = result.map(outTextChange, fileName);
+                result = result.map(i => mapTextChange(newFileName, fileName, i));
             }
 
             return result;

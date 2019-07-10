@@ -1,16 +1,14 @@
 import { LanguageService, OutliningSpan } from "typescript/lib/tsserverlibrary";
-import { Utils, UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function getOutliningSpansFactory(
     lang: LanguageService,
-    { isVueFile, synchronize, toTsFile }: UtilsSync,
-    { outOutliningSpan }: Mappers): LanguageService['getOutliningSpans'] {
+    { handles, toRedirected, mapOutliningSpan }: Mappers): LanguageService['getOutliningSpans'] {
     return function (fileName: string): OutliningSpan[] {
-        if (isVueFile(fileName)) {
-            synchronize();
-            const result = lang.getOutliningSpans(toTsFile(fileName));
+debugger;        if (handles(fileName)) {
+            const newFileName = toRedirected(fileName);
+            const result = lang.getOutliningSpans(newFileName);
             if (result.length) {
-                return result.map(outOutliningSpan, fileName);
+                return result.map(i => mapOutliningSpan(newFileName, fileName, i));
             }
             return result;
         }

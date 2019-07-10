@@ -6,7 +6,7 @@ export function getBraceMatchingAtPositionFactory(
 ): LanguageService['getBraceMatchingAtPosition'] {
     return function (fileName: string, position: number): TextSpan[] {
         debugger;
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getBraceMatchingAtPosition(newFileName, newPosition);

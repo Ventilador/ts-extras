@@ -5,7 +5,7 @@ export function getDocumentHighlightsFactory(
     { handles, toRedirected, movePosition, mapDocumentHighlights }: Mappers
 ): LanguageService['getDocumentHighlights'] {
     return function (fileName: string, position: number, filesToSearch: string[]): DocumentHighlights[] | undefined {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             filesToSearch = filesToSearch.map(file => handles(file) ? toRedirected(file) : file);

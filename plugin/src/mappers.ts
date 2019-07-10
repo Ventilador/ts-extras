@@ -174,8 +174,8 @@ export function createMappers(loader: loaders.Loader): Mappers {
             fileName: moveFile(from, to, info.fileName),
             kind: info.kind,
             name: info.name,
-            originalFileName: moveFile(from, to, info.originalFileName),
-            originalTextSpan: mapTextSpan(from, to, info.originalTextSpan),
+            originalFileName: info.originalFileName && moveFile(from, to, info.originalFileName),
+            originalTextSpan: info.originalTextSpan && mapTextSpan(from, to, info.originalTextSpan),
             textSpan: mapTextSpan(from, to, info.textSpan),
             containerKind: info.containerKind,
             containerName: info.containerName,
@@ -201,7 +201,7 @@ export function createMappers(loader: loaders.Loader): Mappers {
         }
     }
     function mapDiagnosticWithLocation(from: string, to: string, diag: DiagnosticWithLocation): DiagnosticWithLocation {
-        return mapDiagnostic(from, to, diag);
+        return mapDiagnostic(from, to, diag) as DiagnosticWithLocation;
     }
     function mapDocumentHighlights(from: string, to: string, info: DocumentHighlights): DocumentHighlights {
         return {
@@ -326,8 +326,8 @@ export function createMappers(loader: loaders.Loader): Mappers {
             isDefinition: ref.isDefinition,
             isInString: ref.isInString,
             isWriteAccess: ref.isWriteAccess,
-            originalFileName: moveFile(from, to, ref.originalFileName),
-            originalTextSpan: mapTextSpan(from, to, ref.originalTextSpan),
+            originalFileName: ref.originalFileName && moveFile(from, to, ref.originalFileName),
+            originalTextSpan: ref.originalTextSpan && mapTextSpan(from, to, ref.originalTextSpan),
             textSpan: mapTextSpan(from, to, ref.textSpan),
         }
     }
@@ -360,7 +360,7 @@ export function createMappers(loader: loaders.Loader): Mappers {
         return {
             canRename: val.canRename,
             displayName: val.displayName,
-            fileToRename: moveFile(from, to, val.fileToRename),
+            fileToRename: val.fileToRename && moveFile(from, to, val.fileToRename),
             fullDisplayName: val.fullDisplayName,
             kind: val.kind,
             kindModifiers: val.kindModifiers,
@@ -380,8 +380,8 @@ export function createMappers(loader: loaders.Loader): Mappers {
 
         return {
             fileName: moveFile(from, to, rename.fileName),
-            originalFileName: moveFile(from, to, rename.originalFileName),
-            originalTextSpan: mapTextSpan(from, to, rename.originalTextSpan),
+            originalFileName: rename.originalFileName && moveFile(from, to, rename.originalFileName),
+            originalTextSpan: rename.originalTextSpan && mapTextSpan(from, to, rename.originalTextSpan),
             prefixText: rename.prefixText,
             suffixText: rename.suffixText,
             textSpan: mapTextSpan(from, to, rename.textSpan),

@@ -5,7 +5,7 @@ export function findRenameLocationsFactory(
     { mapRenameLocation, handles, toRedirected, movePosition }: Mappers
 ): LanguageService['findRenameLocations'] {
     return function (fileName: string, position: number, findInStrings: boolean, findInComments: boolean, providePrefixAndSuffixTextForRename: boolean | undefined): ReadonlyArray<RenameLocation> | undefined {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.findRenameLocations(newFileName, newPosition, findInStrings, findInComments, providePrefixAndSuffixTextForRename);

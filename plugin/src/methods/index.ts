@@ -49,6 +49,8 @@ import { getNavigationBarItemsFactory } from "./getNavigationBarItems";
 import { getNonBoundSourceFileFactory } from "./getNonBoundSourceFile";
 import { getSourceMapperFactory } from "./getSourceMapper";
 
+
+
 export const MethodFactories = [
     applyCodeActionCommandFactory,
     findReferencesFactory,
@@ -101,9 +103,13 @@ export const MethodFactories = [
     getNonBoundSourceFileFactory,
     getSourceMapperFactory,
 ].reduce((prev, cur) => {
+
     prev[cur.name] = cur;
+
     return prev;
+
 }, Object.create(null) as Record<string, Function>);
+
 
 export { applyCodeActionCommandFactory } from "./applyCodeActionCommand";
 export { findReferencesFactory } from "./findReferences";

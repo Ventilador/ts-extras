@@ -8,7 +8,7 @@ export function getEditsForFileRenameFactory(
         return lang
             .getEditsForFileRename(oldFilePath, newFilePath, formatOptions, preferences)
             .map(change => {
-                if (handles(change.fileName)) {
+debugger;                if (handles(change.fileName)) {
                     return mapFileTextChanges(change.fileName, toRedirected(change.fileName), change)
                 }
                 const newFile = wasRedirected(change.fileName)

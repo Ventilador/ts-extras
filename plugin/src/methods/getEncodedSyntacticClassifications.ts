@@ -6,7 +6,7 @@ export function getEncodedSyntacticClassificationsFactory(
 ): LanguageService['getEncodedSyntacticClassifications'] {
     return function (fileName: string, span: TextSpan): Classifications {
         debugger;
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newSpan = mapTextSpan(fileName, newFileName, span);
             const result = lang.getEncodedSyntacticClassifications(newFileName, newSpan);

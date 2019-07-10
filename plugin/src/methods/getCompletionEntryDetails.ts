@@ -5,7 +5,7 @@ export function getCompletionEntryDetailsFactory(
     { handles, toRedirected, movePosition, mapCompletionEntryDetails }: Mappers
 ): LanguageService['getCompletionEntryDetails'] {
     return function (fileName: string, position: number, name: string, formatOptions: FormatCodeOptions | FormatCodeSettings | undefined, source: string | undefined, preferences: UserPreferences | undefined): CompletionEntryDetails | undefined {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getCompletionEntryDetails(newFileName, newPosition, name, formatOptions, source, preferences);

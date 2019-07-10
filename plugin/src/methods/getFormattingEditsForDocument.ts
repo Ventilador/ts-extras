@@ -4,7 +4,7 @@ export function getFormattingEditsForDocumentFactory(lang: LanguageService,
     { handles, toRedirected, mapTextChange }: Mappers): LanguageService['getFormattingEditsForDocument'] {
     return function (fileName: string, options: FormatCodeOptions | FormatCodeSettings): TextChange[] {
         debugger;
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const result = lang.getFormattingEditsForDocument(newFileName, options);
             if (result.length) {

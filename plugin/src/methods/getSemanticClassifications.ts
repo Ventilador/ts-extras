@@ -1,21 +1,19 @@
 import { ClassifiedSpan, LanguageService, TextSpan } from "typescript/lib/tsserverlibrary";
-import { UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function getSemanticClassificationsFactory(
     lang: LanguageService,
-    { isVueFile, synchronize, toTsFile, calculatePosition }: UtilsSync,
-    { inTextSpan, outClassifiedSpan }: Mappers
+    { handles, toRedirected, mapTextSpan, mapClassifiedSpan }: Mappers
 
 ): LanguageService['getSemanticClassifications'] {
     return function (fileName: string, span: TextSpan): ClassifiedSpan[] {
         debugger;
-        if (isVueFile(fileName)) {
-            synchronize();
-            const newFileName = toTsFile(fileName);
-            const newSpan = inTextSpan(fileName, span);
+debugger;        if (handles(fileName)) {
+
+            const newFileName = toRedirected(fileName);
+            const newSpan = mapTextSpan(fileName, newFileName, span);
             const result = lang.getSemanticClassifications(newFileName, newSpan);
             if (result && result.length) {
-                return result.map(outClassifiedSpan, fileName);
+                return result.map(i => mapClassifiedSpan(newFileName, fileName, i));
             }
         }
 

@@ -70,6 +70,7 @@ export namespace loaders {
 		movePosition: (from: string, to: string, pos: number) => number;
 		moveFile: (from: string, to: string, fileName: string) => string;
 		moveLineAndChar: (from: string, to: string, fileName: LineAndCharacter) => LineAndCharacter;
+		movePositionWithinFile: (from: string, to: string, pos: number) => number;
 		toRedirected: (fileName: string) => string;
 		outOfBounds(from: string, to: string, pos: number | TextRange): boolean;
 	}

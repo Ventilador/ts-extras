@@ -1,18 +1,16 @@
 import { LanguageService, NavigationBarItem } from "typescript/lib/tsserverlibrary";
-import { UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function getNavigationBarItemsFactory(
     lang: LanguageService,
-    { isVueFile, synchronize, toTsFile }: UtilsSync,
-    { outNavigationBarItem }: Mappers,
+    { handles, toRedirected, mapNavigationBarItem }: Mappers,
 ): LanguageService['getNavigationBarItems'] {
     return function (fileName: string): NavigationBarItem[] {
         debugger;
-        if (isVueFile(fileName)) {
-            synchronize();
-            const result = lang.getNavigationBarItems(toTsFile(fileName));
+debugger;        if (handles(fileName)) {
+            const newFileName = toRedirected(fileName);
+            const result = lang.getNavigationBarItems(newFileName);
             if (result.length) {
-                return result.map(outNavigationBarItem, fileName);
+                return result.map(i => mapNavigationBarItem(newFileName, fileName, i));
             }
             return result;
         }

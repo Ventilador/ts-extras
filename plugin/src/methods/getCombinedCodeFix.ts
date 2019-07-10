@@ -6,7 +6,7 @@ export function getCombinedCodeFixFactory(
 ): LanguageService['getCombinedCodeFix'] {
     return function (scope: CombinedCodeFixScope, fixId: {}, formatOptions: FormatCodeSettings, preferences: UserPreferences): CombinedCodeActions {
         debugger;
-        if (handles(scope.fileName)) {
+debugger;        if (handles(scope.fileName)) {
             const newFileName = toRedirected(scope.fileName);
             scope = mapCombinedCodeFixScope(scope.fileName, newFileName, scope);
 

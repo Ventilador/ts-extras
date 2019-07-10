@@ -5,7 +5,7 @@ export function getDocCommentTemplateAtPositionFactory(
     { handles, toRedirected, movePosition, mapTextInsertion }: Mappers
 ): LanguageService['getDocCommentTemplateAtPosition'] {
     return function (fileName: string, position: number): TextInsertion | undefined {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getDocCommentTemplateAtPosition(newFileName, newPosition);

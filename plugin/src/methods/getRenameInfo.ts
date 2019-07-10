@@ -1,19 +1,17 @@
 import { LanguageService, RenameInfo, RenameInfoOptions } from "typescript/lib/tsserverlibrary";
-import { UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function getRenameInfoFactory(
     lang: LanguageService,
-    { isVueFile, synchronize, toTsFile, calculatePosition }: UtilsSync,
-    { outRenameInfo }: Mappers
+    { handles, toRedirected, movePosition, mapRenameInfo }: Mappers
 ): LanguageService['getRenameInfo'] {
     return function (fileName: string, position: number, options: RenameInfoOptions | undefined): RenameInfo {
-        if (isVueFile(fileName)) {
-            synchronize();
-            const newFileName = toTsFile(fileName);
-            const newPosition = calculatePosition({ from: fileName, to: toTsFile(fileName) }, position);
+debugger;        if (handles(fileName)) {
+
+            const newFileName = toRedirected(fileName);
+            const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getRenameInfo(newFileName, newPosition, options);
             if (result) {
-                return outRenameInfo(fileName, result);
+                return mapRenameInfo(newFileName, fileName, result);
             }
 
             return result;

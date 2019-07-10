@@ -1,19 +1,17 @@
 import { FileTextChanges, FormatCodeSettings, LanguageService, OrganizeImportsScope, UserPreferences } from "typescript/lib/tsserverlibrary";
-import { UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function organizeImportsFactory(
     lang: LanguageService,
-    { isVueFile, synchronize }: UtilsSync,
-    { inCombinedCodeFixScope, outFileTextChanges }: Mappers
+    { handles, mapCombinedCodeFixScope, toRedirected, mapFileTextChanges }: Mappers,
 ): LanguageService['organizeImports'] {
     return function (scope: OrganizeImportsScope, formatOptions: FormatCodeSettings, preferences: UserPreferences | undefined): ReadonlyArray<FileTextChanges> {
-        if (isVueFile(scope.fileName)) {
-            synchronize();
-            scope = inCombinedCodeFixScope(scope.fileName, scope);
+debugger;        if (handles(scope.fileName)) {
+            const newFileName = toRedirected(scope.fileName);
+            scope = mapCombinedCodeFixScope(scope.fileName, newFileName, scope);
             const result = lang.organizeImports(scope, formatOptions, preferences);
 
             if (result.length) {
-                return result.map(outFileTextChanges, scope.fileName);
+                return result.map(i => mapFileTextChanges(newFileName, scope.fileName, i));
             }
             return result;
         }

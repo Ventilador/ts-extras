@@ -5,7 +5,7 @@ export function getCompletionsAtPositionFactory(
     { handles, toRedirected, movePosition, mapWithMetadataCompletionInfo }: Mappers
 ): LanguageService['getCompletionsAtPosition'] {
     return function (fileName: string, position: number, options: GetCompletionsAtPositionOptions | undefined): WithMetadata<CompletionInfo> | undefined {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getCompletionsAtPosition(newFileName, newPosition, options);

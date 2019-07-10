@@ -1,18 +1,17 @@
 import { LanguageService, LineAndCharacter } from "typescript/lib/tsserverlibrary";
-import { UtilsSync } from "./../tsUtils";
 import { Mappers } from "./../mappers";
 export function toLineColumnOffsetFactory(
     lang: LanguageService,
-    { isVueFile, synchronize, toTsFile, calculatePosition, outOfBounds }: UtilsSync,
-    { outLineAndCharacter }: Mappers): LanguageService['toLineColumnOffset'] {
+    { handles, toRedirected, movePosition, outOfBounds, mapLineAndCharacter }: Mappers,
+): LanguageService['toLineColumnOffset'] {
     return function (fileName: string, position: number): LineAndCharacter {
-        if (isVueFile(fileName)) {
-            synchronize();
-            const newFileName = toTsFile(fileName);
-            const newPosition = calculatePosition({ from: fileName, to: toTsFile(fileName) }, position);
-            if (!outOfBounds(fileName, newPosition)) {
+debugger;        if (handles(fileName)) {
+
+            const newFileName = toRedirected(fileName);
+            const newPosition = movePosition(fileName, newFileName, position);
+            if (!outOfBounds(fileName, newFileName, newPosition)) {
                 const result = lang.toLineColumnOffset!(newFileName, newPosition);
-                return outLineAndCharacter(fileName, result);
+                return mapLineAndCharacter(newFileName, fileName, result);
             }
         }
 

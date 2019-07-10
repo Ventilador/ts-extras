@@ -6,7 +6,7 @@ export function getDefinitionAtPositionFactory(
     { handles, toRedirected, movePosition, mapDefinitionInfo }: Mappers
 ): LanguageService['getDefinitionAtPosition'] {
     return function (fileName: string, position: number): ReadonlyArray<DefinitionInfo> | undefined {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getDefinitionAtPosition(newFileName, newPosition);

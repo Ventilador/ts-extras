@@ -6,7 +6,7 @@ export function getFormattingEditsAfterKeystrokeFactory(
 ): LanguageService['getFormattingEditsAfterKeystroke'] {
     return function (fileName: string, position: number, key: string, options: FormatCodeOptions | FormatCodeSettings): TextChange[] {
         debugger;
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getFormattingEditsAfterKeystroke(newFileName, newPosition, key, options);
