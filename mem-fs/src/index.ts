@@ -278,8 +278,9 @@ function writeVirtualFileInternal(walk: Walker<FsItem<any>, fs.Events>, fromPath
     if (content && !isNonExistingContent(content)) {
         return;
     }
-
-    toNode.setContent(new VirtualFile(walk(fromPath), toNode, parser));
+    const originatingNode = walk(fromPath);
+    ensureNodeContent(originatingNode);
+    toNode.setContent(new VirtualFile(originatingNode, toNode, parser));
 }
 
 function writeFileInternal(walk: Walker<FsItem<any>, fs.Events>, path: string, content: string) {

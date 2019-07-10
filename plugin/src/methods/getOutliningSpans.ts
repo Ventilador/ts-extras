@@ -4,10 +4,11 @@ export function getOutliningSpansFactory(
     lang: LanguageService,
     { handles, toRedirected, mapOutliningSpan }: Mappers): LanguageService['getOutliningSpans'] {
     return function (fileName: string): OutliningSpan[] {
-debugger;        if (handles(fileName)) {
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const result = lang.getOutliningSpans(newFileName);
             if (result.length) {
+                debugger;
                 return result.map(i => mapOutliningSpan(newFileName, fileName, i));
             }
             return result;

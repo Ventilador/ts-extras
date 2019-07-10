@@ -13,16 +13,22 @@ export default function (loader: loaders.LoaderExport) {
     const fs = createFs(dir, false);
     return function ({ typescript: lib }: { typescript: typeof tsLib }) {
         patchProject(lib.server.ProjectService.prototype, builtLoader);
-        return { create, getExternalFiles };
+        return {
+            create,
+            // getExternalFiles
+        };
     };
     function create(info: tsLib.server.PluginCreateInfo) {
         patchFsLikeMethods(info.serverHost, info.project.projectName, builtLoader);
         return createService(info.languageService, Object.keys(info.languageService) as any, builtLoader);
     }
     function getExternalFiles(project: tsLib.server.Project) {
-        return Array.from(fs.readDirectory(project.getCurrentDirectory(), [builtLoader.extension]).reduce(reduceReadDir, new Set<string>()));
+        return Array.from(fs.readDirectory(project.getCurrentDirectory(), [builtLoader.extension], ['**/node_modules', '**/dist']).reduce(reduceReadDir, new Set<string>()));
     }
     function reduceReadDir(prev: Set<string>, cur: string) {
+        if (cur.includes('node_modules') || cur.includes('dist')) {
+            return prev;
+        }
         if (builtLoader.handles(cur)) {
             builtLoader.redirect(cur, function (from, to) {
                 fs.writeVirtualFile(from, to, function (content) {
