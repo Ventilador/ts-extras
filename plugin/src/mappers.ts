@@ -7,10 +7,14 @@ import {
     LineAndCharacter, TodoComment, SelectionRange, SignatureHelpItems, ClassifiedSpan,
     RenameInfoSuccess, RenameInfoFailure, RenameInfo, QuickInfo, OutliningSpan,
     NavigationTree, NavigationBarItem, JsxClosingTagInfo, NavigateToItem, Classifications,
-    CompletionEntry, CodeAction, ReferencedSymbolDefinitionInfo
+    CompletionEntry, CodeAction, ReferencedSymbolDefinitionInfo, SignatureHelpItemsOptions
 } from "typescript/lib/tsserverlibrary";
 import { loaders } from "@ts-extras/types";
-
+type ExtendedSignatureHelpItemsOptions = {
+    file?: string;
+    line?: number;
+    offset?: number;
+} & SignatureHelpItemsOptions
 export interface Mappers extends loaders.Loader {
     mapApplicableRefactorInfo(from: string, to: string, value: ApplicableRefactorInfo): ApplicableRefactorInfo;
     mapClassifications(from: string, to: string, value: Classifications): Classifications;
@@ -51,6 +55,7 @@ export interface Mappers extends loaders.Loader {
     mapTextRange(from: string, to: string, value: TextRange): TextRange;
     mapTodoComment(from: string, to: string, value: TodoComment): TodoComment;
     mapWithMetadataCompletionInfo(from: string, to: string, value: WithMetadata<CompletionInfo>): WithMetadata<CompletionInfo>;
+    mapSignatureHelpItemsOptions: (from: string, to: string, info: SignatureHelpItemsOptions) => SignatureHelpItemsOptions;
 }
 export function createMappers(loader: loaders.Loader): Mappers {
     const { movePosition, moveFile, handles, wasRedirected, moveLineAndChar, toRedirected } = loader;
@@ -102,8 +107,23 @@ export function createMappers(loader: loaders.Loader): Mappers {
         mapTextRange,
         mapTodoComment,
         mapWithMetadataCompletionInfo,
+        mapSignatureHelpItemsOptions,
     } as Mappers,
         loader);
+
+    function mapSignatureHelpItemsOptions(from: string, to: string, info: SignatureHelpItemsOptions): SignatureHelpItemsOptions;
+    function mapSignatureHelpItemsOptions(from: string, to: string, info: ExtendedSignatureHelpItemsOptions): ExtendedSignatureHelpItemsOptions {
+        const newLineAndChar = moveLineAndChar(from, to, {
+            character: info.offset!,
+            line: info.line!
+        });
+        return {
+            file: info.file ? moveFile(from, to, info.file) : info.file,
+            line: newLineAndChar.line,
+            offset: newLineAndChar.character,
+            triggerReason: info.triggerReason
+        }
+    }
 
     function mapClassifications(from: string, to: string, info: Classifications): Classifications {
         return {
@@ -221,18 +241,6 @@ export function createMappers(loader: loaders.Loader): Mappers {
         }
     }
     function mapFileTextChanges(from: string, to: string, info: FileTextChanges): FileTextChanges {
-        if (handles(info.fileName)) {
-            from = info.fileName;
-            to = toRedirected(info.fileName);
-
-
-        } else {
-            const newFile = wasRedirected(info.fileName);
-            if (newFile) {
-                from = newFile;
-                to = info.fileName;
-            }
-        }
         return {
             fileName: moveFile(from, to, info.fileName),
             isNewFile: info.isNewFile,
@@ -313,14 +321,6 @@ export function createMappers(loader: loaders.Loader): Mappers {
         }
     }
     function mapReferenceEntry(from: string, to: string, ref: ReferenceEntry): ReferenceEntry {
-        if (handles(ref.fileName)) {
-            from = ref.fileName;
-            to = toRedirected(ref.fileName);
-        } else if (from = wasRedirected(ref.fileName) as any) {
-            to = ref.fileName;
-        } else {
-            return ref;
-        }
         return {
             fileName: moveFile(from, to, ref.fileName),
             isDefinition: ref.isDefinition,
@@ -369,15 +369,6 @@ export function createMappers(loader: loaders.Loader): Mappers {
     }
 
     function mapRenameLocation(from: string, to: string, rename: RenameLocation): RenameLocation {
-        if (handles(rename.fileName)) {
-            from = rename.fileName;
-            to = toRedirected(from);
-        } else if (from = wasRedirected(rename.fileName) as any) {
-            to = rename.fileName;
-        } else {
-            return rename;
-        }
-
         return {
             fileName: moveFile(from, to, rename.fileName),
             originalFileName: rename.originalFileName && moveFile(from, to, rename.originalFileName),

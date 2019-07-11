@@ -1,10 +1,13 @@
-import { loaders } from '@ts-extras/types';
+import { loaders, fs } from '@ts-extras/types';
 import { D_TS_EXTENSION, JS_EXTENSION, MAP_EXTENSION, TS_EXTENSION, MAP_D_TS_EXTENSION } from '@ts-extras/constants';
-import { LineAndCharacter, TextRange } from 'typescript';
+import { LineAndCharacter, TextRange, TextChange } from 'typescript';
 
 type InternalMappingFileInfo = loaders.MappingFileInfo & { end: number, size: number };
 const cache = new Map<string, InternalMappingFileInfo>();
-export function createLoader({ redirect: redirector, extension, parse, emit }: loaders.LoaderExport): loaders.Loader {
+export function createLoader(
+    { redirect: redirector, extension, parse, emit }: loaders.LoaderExport,
+    fs: Pick<fs.MemoryFileSystem, 'readFile'>,
+): loaders.Loader {
     const handles = createExtensionChecker(extension);
     const wasRedirected = createFileSlicer(extension, TS_EXTENSION);
     const getDefinitionOutputFileName = createFileSlicer(extension, D_TS_EXTENSION);
@@ -30,7 +33,15 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
         toRedirected,
         movePositionWithinFile,
         outOfBounds,
+        updateContent,
     };
+
+    function updateContent(file: string, chance: TextChange): void {
+        const content = getFromCache(fs, file, readContent);
+        content.oldText = applyChange(content.oldText, chance);
+        readContent(file, toRedirected(file), content.oldText);
+    }
+
 
     function outOfBounds(from: string, to: string, pos: number | TextRange): boolean {
         if (typeof pos === 'number') {
@@ -49,21 +60,19 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
 
     function movePositionWithinFile(from: string, to: string, pos: number): number {
         if (handles(from)) {
-            const { span: { start }, end } = cache.get(from)!;
+            const { span: { start }, end } = getFromCache(fs, from, readContent);
             return between(pos - start, start, end);
         } else if (handles(to)) {
-            const { span: { start }, end } = cache.get(to)!;
+            const { span: { start }, end } = getFromCache(fs, to, readContent);
             return between(start + pos, start, end);
         }
 
         throw new Error(`Does not handles either file names "${from}" "${to}"`);
     }
 
-    function toRedirected(fileName: string) {
-        return fileName + TS_EXTENSION;
-    }
 
     function moveLineAndChar(from: string, to: string, info: LineAndCharacter) {
+        debugger;
         return info;
     }
 
@@ -79,10 +88,10 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
 
     function movePosition(from: string, to: string, pos: number): number {
         if (handles(from)) {
-            const item = cache.get(from)!;
+            const item = getFromCache(fs, from, readContent);
             return pos - item.span.start;
         } else if (handles(to)) {
-            const item = cache.get(to)!;
+            const item = getFromCache(fs, to, readContent);
             return item.span.start + pos;
         }
 
@@ -94,6 +103,7 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
         cache.set(from, extendMapping(result));
         return result.newText;
     }
+
     function redirect(fileName: string, addFile: (fileName: string, to: string) => void) {
         if (redirector && redirector(fileName, addFile)) {
             return true;
@@ -101,6 +111,29 @@ export function createLoader({ redirect: redirector, extension, parse, emit }: l
         addFile(fileName, toRedirected(fileName));
         return true;
     }
+}
+
+function toRedirected(fileName: string) {
+    if (fileName.endsWith(TS_EXTENSION)) {
+        debugger;
+    }
+    return fileName + TS_EXTENSION;
+}
+
+function getFromCache(fs: Pick<fs.MemoryFileSystem, 'readFile'>, file: string, parser: (from: string, to: string, content: string) => string) {
+    let result = cache.get(file);
+    if (result) {
+        return result;
+    }
+
+    const fileContent = fs.readFile(file);
+    parser(file, toRedirected(file), fileContent);
+    return cache.get(file)!;
+
+
+}
+function applyChange(oldText: string, { newText, span: { start, length } }: TextChange) {
+    return `${oldText.slice(0, start)}${newText}${oldText.slice(start + length)}`;
 }
 function extendMapping(value: loaders.MappingFileInfo): InternalMappingFileInfo {
     return Object.assign(value, {

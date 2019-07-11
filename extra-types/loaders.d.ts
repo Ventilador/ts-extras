@@ -31,6 +31,7 @@ export namespace loaders {
 	export type Loader = {
 		extension: string;
 		multiFile: false;
+		updateContent: (file: string, chance: TextChange) => void;
 		emit: (fileName: string, result: Pick<loaders.EmitResult, "getDTs" | "getJs" | "getMap" | "getDTsMap" | "fileName" | "outDir">, writeFile: WriteFileCallback) => any;
         /**
          *

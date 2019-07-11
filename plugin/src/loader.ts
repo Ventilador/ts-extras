@@ -8,14 +8,14 @@ import { patchFsLikeMethods } from "./createFsMethodWrappers";
 import { createFs } from "@ts-extras/mem-fs";
 const dir = process.cwd();
 export default function (loader: loaders.LoaderExport) {
-    const baseLoader = createLoader(loader);
-    const builtLoader = createMappers(baseLoader);
     const fs = createFs(dir, false);
+    const baseLoader = createLoader(loader, fs);
+    const builtLoader = createMappers(baseLoader);
     return function ({ typescript: lib }: { typescript: typeof tsLib }) {
         patchProject(lib.server.ProjectService.prototype, builtLoader);
         return {
             create,
-            // getExternalFiles
+            getExternalFiles,
         };
     };
     function create(info: tsLib.server.PluginCreateInfo) {
