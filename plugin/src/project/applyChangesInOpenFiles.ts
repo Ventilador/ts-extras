@@ -1,25 +1,16 @@
 import { server, ScriptKind, TextChange, SyntaxKind } from "typescript/lib/tsserverlibrary";
 import { Mappers } from "../mappers";
 import { createFs } from "@ts-extras/mem-fs";
-export type ApplyChangesInOpenFiles = (
-    this: server.ProjectService,
-    openFiles: Iterator<OpenFileArguments> | undefined,
-    changedFiles?: Iterator<ChangeFileArguments>,
-    closedFiles?: string[]
-) => any;
+import { fs } from "@ts-extras/types";
+export type ApplyChangesInOpenFiles = (this: server.ProjectService, openFiles: Iterator<OpenFileArguments> | undefined, changedFiles?: Iterator<ChangeFileArguments>, closedFiles?: string[]) => any;
 
 export function applyChangesInOpenFilesFactory(
     orig: ApplyChangesInOpenFiles,
-    { handles, redirect, readContent, mapTextChange, updateContent, wasRedirected, toRedirected, }: Mappers,
+    { handles, redirect, parse, mapTextChange }: Mappers,
 ): ApplyChangesInOpenFiles {
     const fs = createFs(process.cwd(), true);
     let existingOpenedFiles: ts.Map<server.NormalizedPath | undefined> = null as any;
-    return function applyChangesInOpenFiles(
-        this: server.ProjectService,
-        openFiles: Iterator<OpenFileArguments> | undefined,
-        changedFiles?: Iterator<ChangeFileArguments>,
-        closedFiles?: string[]
-    ) {
+    return function applyChangesInOpenFiles(this: server.ProjectService, openFiles: Iterator<OpenFileArguments> | undefined, changedFiles?: Iterator<ChangeFileArguments>, closedFiles?: string[]) {
         existingOpenedFiles = this.openFiles;
         if (openFiles) {
             openFiles = patchOpenedFiles(openFiles);
@@ -58,7 +49,7 @@ export function applyChangesInOpenFilesFactory(
             return;
         }
         const newContent = readContent(from, to, openedFile.content!);
-        fs.writeVirtualFile(from, to, () => newContent);
+        fs.writeVirtualFile(from, to, readContent);
         prev.set(to, {
             content: newContent,
             fileName: to,
@@ -68,17 +59,14 @@ export function applyChangesInOpenFilesFactory(
         });
     }
 
+    function readContent(from: string, to: string, content: string) {
+        return parse(from, to, content).newText;
+    }
+
     function patchChangedFiles(changing: Iterator<ChangeFileArguments>) {
         return iteratorToArray(changing).reduce((prev, changedFile) => {
             if (handles(changedFile.fileName)) {
-                redirect(changedFile.fileName, (from, to) => {
-                    return addChange(prev, to, mapIterator(changedFile.changes, change => {
-                        // change = mapTextChange(from, to, change);
-                        updateContent(from, change);
-                        change = mapTextChange(from, to, change);
-                        return change;
-                    }));
-                });
+                redirect(changedFile.fileName, (from, to) => addChange(prev, to, mapIterator(changedFile.changes, i => mapTextChange(from, to, i))))
             }
             if (hasItem(changedFile.fileName)) {
                 prev.set(changedFile.fileName, changedFile);
@@ -88,10 +76,12 @@ export function applyChangesInOpenFilesFactory(
     }
 
     function addChange(prev: Map<string, ChangeFileArguments>, fileName: string, changes: Iterator<TextChange>) {
-        prev.set(fileName, {
-            fileName: fileName,
-            changes: changes
-        });
+        if (hasItem(fileName)) {
+            prev.set(fileName, {
+                fileName: fileName,
+                changes: changes
+            });
+        }
     }
 
     function patchClosedFiles(closing: string[]): string[] {
@@ -110,6 +100,18 @@ export function applyChangesInOpenFilesFactory(
 
 }
 const cache = Object.create(null) as Record<string, string>;
+function findTsConfig(fs: fs.MemoryFileSystem, path: string) {
+    path = path.toLowerCase();
+    if (cache[path]) {
+        return cache[path];
+    }
+
+    // return cache[path] = findConfig(fs, path);
+}
+
+function findConfig() {
+
+}
 
 function iteratorToArray<T>(iterator: Iterator<T>): T[] {
     const result: T[] = [];
@@ -131,6 +133,8 @@ function mapIterator<T, U>(iter: Iterator<T>, mapFn: (x: T) => U): Iterator<U> {
         }
     };
 }
+
+
 
 export interface OpenFileArguments {
     fileName: string;

@@ -2,8 +2,6 @@ import { normalizePath, readConfigFile, parseJsonConfigFileContent, BuildOptions
 import { dirname, isAbsolute, join } from "path";
 import { Stat } from "@ts-extras/mem-fs";
 import { fs, loaders } from "@ts-extras/types";
-import { createLoaders } from "@ts-extras/loaders";
-import { mapRootFiles } from "./mapRootFiles";
 
 export function loadTsConfig(fs: fs.MemoryFileSystem, path: string) {
     const newpath = resolveTsConfig(fs, path)!;
@@ -17,7 +15,7 @@ export function loadTsConfig(fs: fs.MemoryFileSystem, path: string) {
             const loaders = config.tsLoaders;
             delete config.tsLoaders;
             return {
-                loaders: createLoaders(dirname(newpath), loaders),
+                loaders: loaders as string | string[],
                 configFile: parseJsonConfig(
                     fs,
                     config,
@@ -48,11 +46,11 @@ export function getBuildOptions(watch: boolean): BuildOptions {
     }
 }
 
-export function getAllConfigs(fs: fs.MemoryFileSystem, options: string, loaders: loaders.Loader[]): ParsedCommandLine[] {
+export function getAllConfigs(fs: fs.MemoryFileSystem, options: string, loaders: loaders.CompilerLoader[]): ParsedCommandLine[] {
     return collectAllConfigs(fs, options, loaders, []);
 }
 
-function parseJsonConfig(fs: fs.MemoryFileSystem, config: any, path: string, loaders?: loaders.Loader[]) {
+function parseJsonConfig(fs: fs.MemoryFileSystem, config: any, path: string) {
     return Object.assign(parseJsonConfigFileContent(
         config,
         Object.assign({ useCaseSensitiveFileNames: true, }, fs),
@@ -60,13 +58,13 @@ function parseJsonConfig(fs: fs.MemoryFileSystem, config: any, path: string, loa
     ), { configFilePath: normalizeSlashes(path) });;
 }
 
-function collectAllConfigs(fs: fs.MemoryFileSystem, tsConfigPath: string, loaders: loaders.Loader[], collected: ParsedCommandLine[]): ParsedCommandLine[] {
+function collectAllConfigs(fs: fs.MemoryFileSystem, tsConfigPath: string, loaders: loaders.CompilerLoader[], collected: ParsedCommandLine[]): ParsedCommandLine[] {
     const path = resolveTsConfig(fs, tsConfigPath);
     if (!path || collected.find(byFilePath, path.toLowerCase())) {
         return collected;
     }
     const tsConfig = readConfigFile(path, fs.readFile);
-    const more = parseJsonConfig(fs, tsConfig.config, path, loaders);
+    const more = parseJsonConfig(fs, tsConfig.config, path);
     collected.push(more);
 
     if (more.projectReferences && more.projectReferences.length) {

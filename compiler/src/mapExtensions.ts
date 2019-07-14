@@ -1,6 +1,6 @@
 import { loaders } from "@ts-extras/types";
 
-export function mapExtensions(loaders: loaders.Loader[], extensions?: ReadonlyArray<string>) {
+export function mapExtensions(loaders: loaders.CompilerLoader[], extensions?: ReadonlyArray<string>) {
     if (loaders.length) {
         if (extensions) {
             return extensions.concat(loaders.map(getExt));
@@ -11,6 +11,6 @@ export function mapExtensions(loaders: loaders.Loader[], extensions?: ReadonlyAr
 
     return extensions;
 }
-function getExt(loader: loaders.Loader) {
+function getExt(loader: loaders.CompilerLoader) {
     return loader.extension;
 }

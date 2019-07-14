@@ -3,9 +3,11 @@ import { Node, WatchCallback } from "@ts-extras/tree-node";
 import { Folder } from "./folder";
 import { File } from "./file";
 import { Stat } from "./stat";
+import { fs } from "@ts-extras/types";
 const isVirtualFileSymbol = Symbol('VirtualFile');
+export type Parser<T extends (...args: any[]) => any> = (...args: Parameters<T>) => string;
 export class VirtualFile extends FsItem<string>{
-    constructor(public readonly original: Node<FsItem<string>, any>, node: Node<FsItem<string>, any>, private _parser: any) {
+    constructor(public readonly original: Node<FsItem<string>, any>, node: Node<FsItem<string>, any>, private _parser: fs.VirtualFileParser) {
         super(node);
         pipe(node, original);
     }
@@ -13,7 +15,7 @@ export class VirtualFile extends FsItem<string>{
         return this.original.getContent()!.version();
     }
     public dispose(): void {
-        this._parser = null;
+        this._parser = null as any;
     }
     public stats() {
         return this.original.getContent()!.stats();
@@ -26,7 +28,7 @@ export class VirtualFile extends FsItem<string>{
         return false;
     }
     protected getContent(): string {
-        return this._parser(this.original.getContent()!.read())
+        return this._parser(this.original.fullPath, this._node.fullPath, this.original.getContent()!.read());
     }
 }
 (VirtualFile as any).prototype[isVirtualFileSymbol] = true
@@ -35,7 +37,7 @@ export function isVirtualFile(val: any): val is VirtualFile {
 }
 function pipe(node: Node<any, any>, to: Node<any, any>) {
     node.watch = function (cb: WatchCallback<FsItem<string>, any>) {
-        return to.watch(function (evenName) {
+        return to.watch(function (evenName: string) {
             cb(evenName, to);
         });
     };

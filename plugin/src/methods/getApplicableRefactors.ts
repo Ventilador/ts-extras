@@ -5,7 +5,7 @@ export function getApplicableRefactorsFactory(
     { handles, mapNumberOrTextRange, outOfBounds, toRedirected, mapApplicableRefactorInfo }: Mappers
 ): LanguageService['getApplicableRefactors'] {
     return function (fileName: string, positionOrRange: number | TextRange, preferences: UserPreferences | undefined): ApplicableRefactorInfo[] {
-        if (handles(fileName)) {
+debugger;        if (handles(fileName)) {
 
             const newFileName = toRedirected(fileName);
             const newPosition = mapNumberOrTextRange(fileName, newFileName, positionOrRange);

@@ -2,7 +2,7 @@ import { CompilerHost, normalizePath, SourceFile, CompilerOptions, BuilderProgra
 import { loaders, fs, Extensions } from "@ts-extras/types";
 import { join, dirname, basename } from "path";
 
-export function createWrappedProgram(loaders: loaders.Loader[], rootNames: readonly string[] | undefined, options: CompilerOptions | undefined, host?: CompilerHost | undefined, oldProgram?: BuilderProgram | undefined, configFileParsingDiagnostics?: readonly Diagnostic[] | undefined, projectReferences?: readonly ProjectReference[] | undefined): BuilderProgram {
+export function createWrappedProgram(loaders: loaders.CompilerLoader[], rootNames: readonly string[] | undefined, options: CompilerOptions | undefined, host?: CompilerHost | undefined, oldProgram?: BuilderProgram | undefined, configFileParsingDiagnostics?: readonly Diagnostic[] | undefined, projectReferences?: readonly ProjectReference[] | undefined): BuilderProgram {
     const program = createSemanticDiagnosticsBuilderProgram(rootNames, options, host, oldProgram as any, configFileParsingDiagnostics, projectReferences);
     return Object.assign({}, program, { emit });
     function emit(targetSourceFile?: SourceFile | undefined, _origWriteFile?: loaders.WriteFileCallback | undefined, cancellationToken?: CancellationToken | undefined, emitOnlyDtsFiles?: boolean | undefined, customTransformers?: CustomTransformers | undefined): EmitResult {
@@ -12,7 +12,7 @@ export function createWrappedProgram(loaders: loaders.Loader[], rootNames: reado
         return result;
     }
 }
-function createWriteFileFromLoaders(loaders: loaders.Loader[], writeFile: loaders.WriteFileCallback = noop, options: CompilerOptions) {
+function createWriteFileFromLoaders(loaders: loaders.CompilerLoader[], writeFile: loaders.WriteFileCallback = noop, options: CompilerOptions) {
     if (loaders.length) {
         return createWriteFileWithLoaders(loaders, writeFile, options);
     } else {
@@ -20,24 +20,24 @@ function createWriteFileFromLoaders(loaders: loaders.Loader[], writeFile: loader
     }
 }
 
-function createWriteFileWithLoaders(loaders: loaders.Loader[], writeFileToDisk: loaders.WriteFileCallback = noop, options: CompilerOptions) {
+function createWriteFileWithLoaders(fileLoaders: loaders.CompilerLoader[], writeFileToDisk: loaders.WriteFileCallback = noop, options: CompilerOptions) {
     let cache = new Map<string, CacheItem>();
     return {
         writeFile, flush
     }
     function writeFile(fileName: string, content: string) {
-        for (const loader of loaders) {
+        for (const loader of fileLoaders) {
             let originatingFileName: string | false;
-            if (originatingFileName = loader.getJsOutputFileName(fileName)) {
+            if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.JS, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.JsFile);
 
-            } else if (originatingFileName = loader.getDefinitionOutputFileName(fileName)) {
+            } else if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.DTS, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.DTsFile);
 
-            } else if (originatingFileName = loader.getSourceMapFileName(fileName)) {
+            } else if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.MAP, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.MapFile);
 
-            } else if (originatingFileName = loader.getDTsSourceMapFileName(fileName)) {
+            } else if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.DTSMAP, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.DTsMapFile);
 
             }
@@ -55,7 +55,7 @@ function createWriteFileWithLoaders(loaders: loaders.Loader[], writeFileToDisk: 
         });
         cache = new Map<string, CacheItem>();
     }
-    function add(loader: loaders.Loader, fileName: string, toWrite: string, content: string, ext: Extensions) {
+    function add(loader: loaders.CompilerLoader, fileName: string, toWrite: string, content: string, ext: Extensions) {
         if (cache.has(fileName)) {
             cache.get(fileName)![ext] = { toWrite, content, loader };
         } else {
@@ -122,7 +122,7 @@ type CacheItem = {
 type Item = {
     toWrite: string;
     content: string;
-    loader: loaders.Loader;
+    loader: loaders.CompilerLoader;
 }
 
 function redirectFileToSource(file: string, options: CompilerOptions) {

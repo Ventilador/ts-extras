@@ -1,17 +1,19 @@
 import { resolve, dirname } from "path";
 import { loaders } from "@ts-extras/types";
-import { createLoader } from "./loader";
-export { createLoader } from './loader';
-import { readFileSync } from "fs";
-
+import { createServerLoader } from "./serverLoader";
+import { createCompilerLoader } from "./compilerLoader";
+export { createCompilerLoader } from "./compilerLoader";
+export { createServerLoader } from "./serverLoader";
+export { createBaseLoader } from './baseLoader';
 let doRegister = function register() {
     require('@ts-extras/register')(require('typescript'));
     doRegister = () => { };
 }
-export function getLoaders(packageJsonPath: string) {
+
+export function getCompilerLoaders(packageJsonPath: string) {
     const pack: loaders.AugPackageJson = require(packageJsonPath);
     if (pack.tsLoaders) {
-        const loaders = createLoaders(dirname(packageJsonPath), pack.tsLoaders);
+        const loaders = createCompilerLoaders(dirname(packageJsonPath), pack.tsLoaders);
         if (loaders.length) {
             return loaders;
         }
@@ -20,20 +22,49 @@ export function getLoaders(packageJsonPath: string) {
     return [];
 }
 
-export function createLoaders(dirName: string, tsLoaders: loaders.PackageJsonConfigPath | loaders.PackageJsonConfigPath[]) {
+export function createCompilerLoaders(dirName: string, tsLoaders: loaders.PackageJsonConfigPath | loaders.PackageJsonConfigPath[]) {
+    const loadersPaths = Array.isArray(tsLoaders) ? tsLoaders : [tsLoaders];
+    return loadersPaths.map(createCompilerLoaderInternal, dirName).filter(isLoader);
+}
+
+
+export function getServerLoaders(packageJsonPath: string) {
+    const pack: loaders.AugPackageJson = require(packageJsonPath);
+    if (pack.tsLoaders) {
+        const loaders = createServerLoaders(dirname(packageJsonPath), pack.tsLoaders);
+        if (loaders.length) {
+            return loaders;
+        }
+    }
+
+    return [];
+}
+
+export function createServerLoaders(dirName: string, tsLoaders: loaders.PackageJsonConfigPath | loaders.PackageJsonConfigPath[]) {
     const loadersPaths = Array.isArray(tsLoaders) ? tsLoaders : [tsLoaders];
     return loadersPaths.map(createLoaderInternal, dirName).filter(isLoader);
 }
 
-function isLoader(val: any): val is loaders.Loader {
+function isLoader<T extends loaders.BaseLoader>(val: T | undefined): val is T {
     return !!val;
 }
 
-function createLoaderInternal(this/*dirName*/: string, config: loaders.PackageJsonConfigPath): loaders.Loader | undefined {
+function createLoaderInternal(this/*dirName*/: string, config: loaders.PackageJsonConfigPath): loaders.ServerLoader | undefined {
     doRegister();
     const options = requireLoader(resolve(this, config));
     if (options) {
-        return createLoader(options.default, pseudoFs);
+        return createServerLoader(options.default);
+    }
+
+    return;
+}
+
+
+function createCompilerLoaderInternal(this/*dirName*/: string, config: loaders.PackageJsonConfigPath): loaders.CompilerLoader | undefined {
+    doRegister();
+    const options = requireLoader(resolve(this, config));
+    if (options) {
+        return createCompilerLoader(options.default);
     }
 
     return;
@@ -43,12 +74,4 @@ function requireLoader(path: string): loaders.LoaderFileExport | undefined {
     try {
         return require(path);
     } catch{ }
-}
-const pseudoFs = { readFile };
-function readFile(fileName: string) {
-    try {
-        return readFileSync(fileName, 'utf8');
-    } catch{
-        return '';
-    }
 }

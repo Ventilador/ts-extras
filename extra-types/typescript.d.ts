@@ -9,12 +9,6 @@ declare module 'typescript' {
         getOrCreateCacheForDirectory(directoryName: string, redirectedReference?: ResolvedProjectReference): Map<ResolvedModuleWithFailedLookupLocations>;
         directoryToModuleNameMap: CacheWithRedirects<Map<ResolvedModuleWithFailedLookupLocations>>;
     }
-    export interface SignatureHelpItemsOptions {
-        file: string;
-        line: number;
-        offset: number;
-        triggerReason?: SignatureHelpTriggerReason;
-    }
     export function normalizeSlashes(path: string): string;
     export function toPath(fileName: string, basePath: string | undefined, getCanonicalFileName: (path: string) => string): Path;
     export interface CacheWithRedirects<T> {

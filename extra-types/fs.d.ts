@@ -1,3 +1,5 @@
+import { loaders } from "./loaders";
+
 export namespace fs {
     export type Stat = {
         mtime: Date;
@@ -14,7 +16,7 @@ export namespace fs {
         watchDirectory: (path: string, cb: WatchCallback) => Unwatch;
         readFile: (path: string) => string;
         writeFile: (path: string, content: string) => void;
-        writeVirtualFile: (fromPath: string, toPath: string, parser: (content: string) => string) => void;
+        writeVirtualFile: (fromPath: string, toPath: string, parser: VirtualFileParser) => void;
         readdir: (path: string) => string[];
         stat: (path: string) => Stat;
         fileExists: (path: string) => boolean;
@@ -24,7 +26,8 @@ export namespace fs {
         readDirectory: (path: string, extensions?: ReadonlyArray<string>, exclude?: ReadonlyArray<string>, include?: ReadonlyArray<string>, depth?: number) => string[];
         promises: AsyncMemoryFileSystem;
     };
-
+    export type VirtualFileParser = ReturnsStringFrom<loaders.BaseLoader['parse']>;
+    export type ReturnsStringFrom<T extends (...args: any[]) => any> = (...args: Parameters<T>) => string;
     type AsyncMemoryFileSystem = {
         [key in keyof PromiseableMethods]: (...args: Parameters<MemoryFileSystem[key]>) => Promise<ReturnType<MemoryFileSystem[key]>>;
     };

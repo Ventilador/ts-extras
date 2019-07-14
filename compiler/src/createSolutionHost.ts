@@ -1,18 +1,17 @@
 import {
     SolutionBuilderHost, SolutionBuilderWithWatchHost, BuilderProgram,
     getDefaultLibFileName, resolveModuleName,
-    createEmitAndSemanticDiagnosticsBuilderProgram, CreateProgram,
     ResolvedTypeReferenceDirective, Diagnostic,
     formatDiagnosticsWithColorAndContext, sys,
-    CompilerOptions, createModuleResolutionCache,
-    ResolvedProjectReference, resolveTypeReferenceDirective, FileWatcherCallback, createBigIntLiteral, FileWatcherEventKind, DirectoryWatcherCallback, ProjectReference, createSemanticDiagnosticsBuilderProgram, CompilerHost, Program, ParsedCommandLine, normalizeSlashes, DiagnosticMessageChain,
+    CompilerOptions,
+    ResolvedProjectReference, resolveTypeReferenceDirective, FileWatcherCallback, FileWatcherEventKind, DirectoryWatcherCallback, ProjectReference, CompilerHost, ParsedCommandLine, normalizeSlashes,
 } from "typescript";
-import { getLoaders } from '@ts-extras/loaders';
+import { createCompilerLoaders, getCompilerLoaders } from '@ts-extras/loaders';
 import { Stat } from "@ts-extras/mem-fs";
 import { dirname, resolve, join } from "path";
 import { loadTsConfig, getAllConfigs } from "./utils";
 import { mapRootFiles } from "./mapRootFiles";
-import { fs, loaders } from "@ts-extras/types";
+import { fs } from "@ts-extras/types";
 import { createWrappedProgram } from "./createProgram";
 import { mapExtensions } from "./mapExtensions";
 const diagHost = {
@@ -25,9 +24,11 @@ const dir = process.cwd();
 const libLocation = dirname(resolve(sys.getExecutingFilePath()));
 export function createHost(path: string, fs: fs.MemoryFileSystem): SolutionBuilder {
     cleanScreen();
-    const { configFile, loaders: tsConfigLoaders } = loadTsConfig(fs, path);
+    const { configFile, loaders: loadersPath } = loadTsConfig(fs, path);
+
+    const tsConfigLoaders = createCompilerLoaders(dirname(path), loadersPath);
     const configsByFile = new Map<string, ParsedCommandLine>();
-    const packageJsonLoaders = getLoaders(join(dirname(path), 'package.json'));
+    const packageJsonLoaders = getCompilerLoaders(join(dirname(path), 'package.json'));
     const loaders = tsConfigLoaders.concat(packageJsonLoaders);
     const compilerHost: SolutionBuilder = {
         deleteFile: fs.deleteFile,
@@ -95,7 +96,7 @@ export function createHost(path: string, fs: fs.MemoryFileSystem): SolutionBuild
             return fs.readFile(path);
         } catch{ }
     }
-    
+
     function getDirectories(path: string) {
         return fs.readdir(path)
             .filter(item => fs.directoryExists(join(path, item)));

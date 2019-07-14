@@ -1,11 +1,11 @@
 import { loaders, fs } from "@ts-extras/types";
 import { normalizeSlashes } from 'typescript';
 
-export function mapRootFiles<T extends readonly string[] | undefined>(fileNames: T, loaders: loaders.Loader[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']): T {
+export function mapRootFiles<T extends readonly string[] | undefined>(fileNames: T, loaders: loaders.CompilerLoader[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']): T {
     return fileNames && mapper(fileNames!, loaders, writeVirtualFile) as any;
 }
 
-function mapper(fileNames: readonly string[], loaders: loaders.Loader[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']): string[] {
+function mapper(fileNames: readonly string[], loaders: loaders.CompilerLoader[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']): string[] {
     if (loaders.length) {
         return mapWithLoaders(fileNames, loaders, writeVirtualFile);
     }
@@ -13,7 +13,7 @@ function mapper(fileNames: readonly string[], loaders: loaders.Loader[], writeVi
     return fileNames as any;
 }
 
-function mapWithLoaders(fileNames: readonly string[], loaders: loaders.Loader[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']) {
+function mapWithLoaders(fileNames: readonly string[], loaders: loaders.CompilerLoader[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']) {
     const result: string[] = [];
     fileNames.map(normalizeSlashes).forEach(reduceLoaders);
     return result;
@@ -25,7 +25,7 @@ function mapWithLoaders(fileNames: readonly string[], loaders: loaders.Loader[],
         }
     }
 }
-function createRedirector(loader: loaders.Loader, prev: string[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']) {
+function createRedirector(loader: loaders.CompilerLoader, prev: string[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']) {
     return function (from: string, to: string) {
         prev.push(to);
         writeVirtualFile(from, to, function (content) {

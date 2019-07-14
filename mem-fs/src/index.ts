@@ -8,7 +8,7 @@ import { Folder } from "./contents/folder";
 import { join } from "path";
 import { UnsavedFile } from "./contents/unsavedFile";
 import { NonExisting } from "./contents/nonExisting";
-import { fs } from "@ts-extras/types";
+import { fs, loaders } from "@ts-extras/types";
 import { VirtualFile, isVirtualFile } from "./contents/virtualFile";
 export * from './contents/stat';
 function noop(...args: any[]): any;
@@ -94,7 +94,7 @@ export function createFs(rootDir: string, watchFileSystem: boolean): fs.MemoryFi
         return writeFileInternal(walk, path, content);
     }
 
-    function writeVirtualFile(fromPath: string, toPath: string, parser: ((content: string) => string)) {
+    function writeVirtualFile(fromPath: string, toPath: string, parser: fs.VirtualFileParser) {
         return writeVirtualFileInternal(walk, fromPath, toPath, parser);
     }
 
@@ -272,15 +272,14 @@ function directoryExistsInternal(walk: Walker<FsItem<any>, fs.Events>, path: str
     }
 }
 
-function writeVirtualFileInternal(walk: Walker<FsItem<any>, fs.Events>, fromPath: string, toPath: string, parser: (content: string) => string) {
+function writeVirtualFileInternal(walk: Walker<FsItem<any>, fs.Events>, fromPath: string, toPath: string, parser: fs.VirtualFileParser) {
     const toNode = walk(toPath);
     const content = toNode.getContent();
     if (content && !isNonExistingContent(content)) {
         return;
     }
-    const originatingNode = walk(fromPath);
-    ensureNodeContent(originatingNode);
-    toNode.setContent(new VirtualFile(originatingNode, toNode, parser));
+
+    toNode.setContent(new VirtualFile(walk(fromPath), toNode, parser));
 }
 
 function writeFileInternal(walk: Walker<FsItem<any>, fs.Events>, path: string, content: string) {

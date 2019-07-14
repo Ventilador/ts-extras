@@ -8,11 +8,11 @@
         "tsBuildInfoFile": "./dist/tsbuild.info",
         "paths": {
             "@ts-extras/loaders/*": [
-                "../loaders/src/*",
+                "../loaders/src/*"
             ],
             "@ts-extras/mem-fs/*": [
-                "../mem-fs/src/*",
-            ]
+                "../mem-fs/src/*"
+            ],
         }
     },
     "include": [
@@ -24,6 +24,6 @@
         },
         {
             "path": "../mem-fs"
-        },
+        }
     ]
 }
