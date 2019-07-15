@@ -59,12 +59,17 @@ const cache = {} as Record<string, (file: string) => boolean>;
 function getExtensionChecker(extension: string, type: string): (file: string) => string | false
 function getExtensionChecker(extension: string): (file: string) => boolean
 function getExtensionChecker(extension: string, type?: string) {
-    if (cache[extension]) {
-        return cache[extension];
+    const cacheKey = arguments.length === 1 ? extension : extension + type;
+    if (cache[cacheKey]) {
+        return cache[cacheKey];
     }
 
-    return cache[extension] = new Function('fileName', `return fileName.length > ${extension.length} &&
-        ${extension.split('').reverse().map((c, i) => `fileName[fileName.length - ${i + 1}] === '${c}'`).join(`&&
-        `)}${type ? ` &&
+    return cache[cacheKey] = new Function('fileName', `return fileName.length > ${extension.length} &&
+        ${getChecker(extension + (type || ''))}${type ? ` &&
         fileName.slice(0, -${type.length})` : ''};`) as any;
+}
+
+function getChecker(ext: string) {
+    return `${ext.split('').reverse().map((c, i) => `fileName[fileName.length - ${i + 1}] === '${c}'`).join(` &&
+        `)}`
 }

@@ -28,8 +28,6 @@ function mapWithLoaders(fileNames: readonly string[], loaders: loaders.CompilerL
 function createRedirector(loader: loaders.CompilerLoader, prev: string[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']) {
     return function (from: string, to: string) {
         prev.push(to);
-        writeVirtualFile(from, to, function (content) {
-            return loader.readContent(from, to, content);
-        });
+        writeVirtualFile(from, to, loader.readContent);
     }
 }

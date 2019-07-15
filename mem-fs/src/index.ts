@@ -311,11 +311,14 @@ function readFileInternal(walk: Walker<FsItem<any>, fs.Events>, path: string): s
 
 function writeToDisk(node: INode, content: string) {
     ensureParentsBeforeWritting(node._parent);
-    write(node.fullPath, content, function () {
-        const nodeContent = node.getContent()!
-        if (nodeContent.read() === content) {
-            (nodeContent as UnsavedFile).promote();
+    write(node.fullPath, content, function (err) {
+        if(err){
+            console.error(err);
         }
+        // const nodeContent = node.getContent()!
+        // if (nodeContent.read() === content) {
+        //     (nodeContent as UnsavedFile).promote();
+        // }
     });
 }
 

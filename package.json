@@ -20,6 +20,7 @@
     "typescript": "^3.5.1"
   },
   "scripts": {
+    "link-packages": "yarn unlink && yarn link",
     "ts-node": "node ./bin/ts-node",
     "play": "yarn ts-node bin/playground.ts",
     "all": "node bin/workspaces",
