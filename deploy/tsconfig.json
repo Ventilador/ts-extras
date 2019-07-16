@@ -4,30 +4,11 @@
         "rootDir": "./src",
         "outDir": "./dist",
         "strict": true,
-        "baseUrl": "./src",
         "tsBuildInfoFile": "./dist/tsbuild.info",
         "preserveConstEnums": true,
-        // "paths": {
-        //     "@ts-extras/tree-node/*": [
-        //         "../tree-node/src/*"
-        //     ],
-        //     "@ts-extras/types/*": [
-        //         "../extra-types/*"
-        //     ],
-        //     "@ts-extras/mem-fs/*": [
-        //         "../mem-fs/src/*"
-        //     ],
-        //     "@ts-extras/constants/*": [
-        //         "../constants/src/*"
-        //     ]
-        // }
     },
     "include": [
         "src/**/*.ts"
     ],
-    // "references": [
-    //     {
-    //         "path": "../tree-node/"
-    //     }
-    // ]
+   
 }

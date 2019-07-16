@@ -14,6 +14,6 @@
     "@types/node": "^12.0.4"
   },
   "bin": {
-    "tscx": "./.bin/tscx.js"
+    "tscx": "./bin/tscx.js"
   }
 }

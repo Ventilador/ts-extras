@@ -12,7 +12,8 @@ export interface PackageJson {
     engines?: Record<string, string>;
     main: string;
     peerDependencies?: Record<string, string>;
-    bin?: string | Record<string, string>
+    dependencies?: Record<string, string>;
+    bin?: Record<string, string>
 }
 
 export interface TsConfig {

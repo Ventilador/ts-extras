@@ -1,10 +1,9 @@
-import { readFile as readFileFs, readFileSync, readdir as readdirFs, readdirSync, writeFileSync, existsSync } from "fs";
-import { promisify } from 'util';
-const readdir = promisify(readdirFs);
-const readFile = promisify(readFileFs);
+import { readFileSync, readdirSync, writeFileSync, existsSync } from "fs";
 import { join, resolve } from "path";
 import { PackageJson, TsConfig } from "./json";
-import { isConstructorDeclaration, isForOfStatement, reduceEachTrailingCommentRange } from "typescript";
+import { getPublishVersion } from "./getPublishedVersion";
+import { moveBinFolder } from "./moveBin";
+const forced = process.argv.includes('-f');
 type BuildFileInfo = {
     version: string;
     signature: string;
@@ -66,7 +65,7 @@ export class Workspace {
     }
 
     @Memoize()
-    distPackageJson() {
+    distPackageJson(): PackageJson {
         return {
             name: this.name(),
             version: this.version(),
@@ -80,7 +79,7 @@ export class Workspace {
             homepage: this.homepage(),
             keywords: this.keywords(),
             licenses: this.licenses(),
-            peerDependencies: this.peerDependencies(),
+            dependencies: this.peerDependencies(),
         }
     }
 
@@ -103,6 +102,9 @@ export class Workspace {
 
     @Memoize()
     private didChange(): boolean {
+        if (forced) {
+            return true;
+        }
         if (shouldContinue(this._name)) {
             const version = getWorkspaceVersion(this._name);
             let shouldPublish = isFirstTime(version);
@@ -154,7 +156,11 @@ export class Workspace {
 
     @Memoize()
     private bin() {
-        return this._json.bin;
+        const bin = this._json.bin;
+        if (bin) {
+            moveBinFolder(this._folder, this.distFolder()!, bin);
+        }
+        return bin;
     }
 
     @Memoize()
@@ -235,7 +241,7 @@ export class Workspace {
 
     @Memoize()
     private version(): string {
-        const version = (this._getWorkspaceSavedVersion()) || (this._json.version) || (this._parent && this._parent._json.version) || ('0.0.1');
+        const version = getPublishVersion(this.name()) || (this._getWorkspaceSavedVersion()) || (this._json.version) || (this._parent && this._parent._json.version) || ('0.0.1');
         if (this.didChange()) {
             return upVersion(version);
         }

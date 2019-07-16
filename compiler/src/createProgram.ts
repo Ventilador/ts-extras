@@ -4,11 +4,13 @@ import { join, dirname, basename } from "path";
 
 export function createWrappedProgram(loaders: loaders.CompilerLoader[], rootNames: readonly string[] | undefined, options: CompilerOptions | undefined, host?: CompilerHost | undefined, oldProgram?: BuilderProgram | undefined, configFileParsingDiagnostics?: readonly Diagnostic[] | undefined, projectReferences?: readonly ProjectReference[] | undefined): BuilderProgram {
     const program = createSemanticDiagnosticsBuilderProgram(rootNames, options, host, oldProgram as any, configFileParsingDiagnostics, projectReferences);
+
     return Object.assign({}, program, { emit });
     function emit(targetSourceFile?: SourceFile | undefined, _origWriteFile?: loaders.WriteFileCallback | undefined, cancellationToken?: CancellationToken | undefined, emitOnlyDtsFiles?: boolean | undefined, customTransformers?: CustomTransformers | undefined): EmitResult {
         const { flush, writeFile } = createWriteFileFromLoaders(loaders, host!.writeFile as any, options!);
         const result = program.emit(targetSourceFile, writeFile, cancellationToken, emitOnlyDtsFiles);
         flush();
+        loaders.forEach((i: any) => i.after && i.after(program));
         return result;
     }
 }

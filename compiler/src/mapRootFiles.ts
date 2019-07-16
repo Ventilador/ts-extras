@@ -19,10 +19,14 @@ function mapWithLoaders(fileNames: readonly string[], loaders: loaders.CompilerL
     return result;
     function reduceLoaders(file: string) {
         for (const loader of loaders) {
-            if (!loader.handles(file) || !loader.redirect(file, createRedirector(loader, result, writeVirtualFile))) {
-                result.push(file);
+            if (loader.handles(file)) {
+                if (loader.redirect(file, createRedirector(loader, result, writeVirtualFile))) {
+                    return;
+                }
+                break;
             }
         }
+        result.push(file);
     }
 }
 function createRedirector(loader: loaders.CompilerLoader, prev: string[], writeVirtualFile: fs.MemoryFileSystem['writeVirtualFile']) {

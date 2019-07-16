@@ -4,29 +4,37 @@ import { Workspace } from './workspace';
 import { PackageJson } from './json';
 import { writeFileSync } from 'fs';
 import { spawnSync } from 'child_process';
+import { compileTypes } from './buildTypes';
+
 const rootDir = resolve(__dirname, '../..');
 const packageJson = require(getJsonPath(rootDir));
 const parent = new Workspace(null, '@ts-extras', rootDir, packageJson, null as any);
-if ((packageJson.workspaces as string[])
+
+compileTypes('extra-types')
+const workspacesWithChanges = (packageJson.workspaces as string[])
     .filter(i => !packageJson['disabled-workspaces'].includes(i))
     .map(processWorkspace)
-    .filter((i): i is Workspace => !!(i && i.changed()))
-    .map((workspace: Workspace) => {
+    .filter((i): i is Workspace =>  !!(i && i.changed()))
+    .map((workspace: any) => {
         const distFolder = workspace.distFolder();
         if (distFolder) {
             writeFileSync(getJsonPath(distFolder), JSON.stringify(workspace.distPackageJson(), undefined, '  '));
         }
         return workspace.update();
-    }).map(workspace => {
+    })
+    .map(workspace => {
         spawnSync('npm', ['publish', '--access=public'], {
             cwd: workspace.distFolder(),
             shell: true,
             stdio: 'inherit'
-        })
-    }).length) {
+        });
+    });
 
+
+if (workspacesWithChanges.length) {
     Workspace.Save();
 }
+
 function processWorkspace(name: string): Workspace | undefined {
     const workspaceFolder = resolve(rootDir, name);
     const workspacePackageJson = require(getJsonPath(workspaceFolder));

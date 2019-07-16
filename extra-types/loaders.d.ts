@@ -1,4 +1,4 @@
-import { TextRange, FileTextChanges, TextChange, LineAndCharacter } from 'typescript';
+import { TextRange, FileTextChanges, TextChange, LineAndCharacter, Program } from 'typescript';
 export namespace loaders {
 	export type AugPackageJson = {
 		tsLoaders: PackageJsonConfigPath | PackageJsonConfigPath[];
@@ -7,6 +7,7 @@ export namespace loaders {
 	export type PackageJsonConfigPath = string;
 	export type LoaderObject = {
 		extension: string;
+		after?: (currentProgram: Program) => any;
 		parse: (fileName: string, to: string, content: string) => MappingFileInfo;
 		redirect?: Redirector;
 		emit?: (fileName: string, result: EmitResult, writeFile: WriteFileCallback) => any;
@@ -31,7 +32,13 @@ export namespace loaders {
 	export type BaseLoader = {
 		dirname: string;
 		extension: string;
+
 		multiFile: false;
+		/**
+		 * Optional callback to do some work after a program finished emitting files
+		 * @param currentProgram current program
+		 */
+		after?: (currentProgram: Program) => any;
 		/**
 		 * @param fileName file path to parse
 		 * @param to file path of the newly parsed file

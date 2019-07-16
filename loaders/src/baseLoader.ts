@@ -2,7 +2,7 @@ import { loaders } from "@ts-extras/types";
 import { TS_EXTENSION } from "@ts-extras/constants";
 
 export function createBaseLoader(info: loaders.LoaderExport, dirname: string = process.cwd()): loaders.BaseLoader {
-    const { extension, redirect: redirector, parse: loaderParser } = info;
+    const { extension, redirect: redirector, parse: loaderParser, after } = info;
     const handles = getExtensionChecker(extension);
     const wasRedirected = getExtensionChecker(extension, TS_EXTENSION);
     const wasRedirectedFrom = wasRedirectedFromFactory(extension);
@@ -16,6 +16,7 @@ export function createBaseLoader(info: loaders.LoaderExport, dirname: string = p
         wasRedirectedFrom,
         toRedirected,
         parse,
+        after,
     }
 
     function parse(fileName: string, to: string, content: string): loaders.MappedFileInfo {
