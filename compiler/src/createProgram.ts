@@ -101,26 +101,37 @@ function getFileBy(files: IFiles, ext: Extensions) {
         default:
             throw new Error(`Invalid extension`)
     }
-    const content = file.content;
+    const content = file && file.content;
     return function () {
         return content;
     }
 }
 
 function assertAllLoadersAreTheSame(a: Item, b: Item, c: Item, d: Item) {
-    if (a.loader === b.loader &&
-        a.loader === c.loader &&
-        a.loader === d.loader &&
-        b.loader === c.loader &&
-        b.loader === d.loader &&
-        c.loader === d.loader) {
+    const uniqueSet = new Set();
+    if (a) {
+        uniqueSet.add(a.loader);
+    }
+    if (b) {
+        uniqueSet.add(b.loader);
+    }
+    if (c) {
+        uniqueSet.add(c.loader);
+    }
+    if (d) {
+        uniqueSet.add(d.loader);
+    }
+    if (uniqueSet.size === 1) {
         return a.loader;
     }
+
     throw new Error('Loaders mismatch');
 }
+
 type CacheItem = {
     [key: number]: Item;
 }
+
 type Item = {
     toWrite: string;
     content: string;

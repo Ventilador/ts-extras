@@ -1,4 +1,4 @@
-import { lstatSync, writeFile as write, realpathSync, mkdirSync, FSWatcher, watch as fsWatch } from "fs";
+import { lstatSync, writeFile as write, writeFileSync, realpathSync, mkdirSync, FSWatcher, watch as fsWatch } from "fs";
 import { FileSystemEntries, matchFiles } from "typescript";
 import { Node, createPointer, Walker } from '@ts-extras/tree-node';
 import { FsItem } from "./contents/fsItem";
@@ -311,15 +311,7 @@ function readFileInternal(walk: Walker<FsItem<any>, fs.Events>, path: string): s
 
 function writeToDisk(node: INode, content: string) {
     ensureParentsBeforeWritting(node._parent);
-    write(node.fullPath, content, function (err) {
-        if(err){
-            console.error(err);
-        }
-        // const nodeContent = node.getContent()!
-        // if (nodeContent.read() === content) {
-        //     (nodeContent as UnsavedFile).promote();
-        // }
-    });
+    writeFileSync(node.fullPath, content);
 }
 
 type INode = Node<FsItem<any>, fs.Events> & { _parent: INode };

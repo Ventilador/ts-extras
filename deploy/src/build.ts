@@ -4,17 +4,18 @@ import { Workspace } from './workspace';
 import { PackageJson } from './json';
 import { writeFileSync } from 'fs';
 import { spawnSync } from 'child_process';
-import { compileTypes } from './buildTypes';
+import { copyNonCompiledProject } from './copyNonCompiledFiles';
 
 const rootDir = resolve(__dirname, '../..');
 const packageJson = require(getJsonPath(rootDir));
 const parent = new Workspace(null, '@ts-extras', rootDir, packageJson, null as any);
 
-compileTypes('extra-types')
+copyNonCompiledProject('extra-types', '.d.ts');
+copyNonCompiledProject('register', '.js');
 const workspacesWithChanges = (packageJson.workspaces as string[])
     .filter(i => !packageJson['disabled-workspaces'].includes(i))
     .map(processWorkspace)
-    .filter((i): i is Workspace =>  !!(i && i.changed()))
+    .filter((i): i is Workspace => !!(i && i.changed()))
     .map((workspace: any) => {
         const distFolder = workspace.distFolder();
         if (distFolder) {

@@ -17,6 +17,9 @@
         {
             "path": "extra-types"
         },
+        {
+            "path": "register"
+        },
         // {
         //     "path": "serialization"
         // },

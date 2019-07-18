@@ -7,7 +7,7 @@ export function getPublishVersion(name: string) {
     }
     try {
         const result = spawnSync('npm', ['view', name, 'version'], { shell: true });
-        if (result.error) {
+        if (result.stderr.length) {
             return cache[name] = '';
         }
         return cache[name] = result.output.join('').trim();

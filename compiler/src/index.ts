@@ -1,7 +1,7 @@
 import { createSolutionBuilder } from 'typescript';
 import { createFs } from '@ts-extras/mem-fs';
-import { dirname } from 'path';
 import { createHost } from './createSolutionHost';
+import { dirname } from 'path';
 import { getBuildOptions } from './utils';
 
 export default function (tsConfigPath: string, watch: boolean) {

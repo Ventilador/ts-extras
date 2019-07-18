@@ -1,7 +1,7 @@
 import { readdirSync, existsSync, mkdirSync, copyFileSync } from "fs";
 import { join } from "path";
 
-export function compileTypes(typesFolder: string) {
+export function copyNonCompiledProject(typesFolder: string, ext: string) {
     const dir = process.cwd();
     const typesDir = join(dir, typesFolder);
     const distFolder = join(typesDir, 'dist');
@@ -10,7 +10,7 @@ export function compileTypes(typesFolder: string) {
     }
     readdirSync(typesDir)
         .forEach((file) => {
-            if (file.endsWith('.d.ts')) {
+            if (file.endsWith(ext)) {
                 copyFileSync(join(typesDir, file), join(distFolder, file));
             }
         });
