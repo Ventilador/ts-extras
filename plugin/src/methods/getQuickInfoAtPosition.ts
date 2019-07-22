@@ -5,7 +5,7 @@ export function getQuickInfoAtPositionFactory(
     { handles, toRedirected, movePosition, mapQuickInfo }: Mappers
 ): LanguageService['getQuickInfoAtPosition'] {
     return function (fileName: string, position: number): QuickInfo | undefined {
-debugger;        if (handles(fileName)) {
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
             const result = lang.getQuickInfoAtPosition(newFileName, newPosition);

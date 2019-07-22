@@ -3,11 +3,16 @@ export namespace loaders {
 	export type AugPackageJson = {
 		tsLoaders: PackageJsonConfigPath | PackageJsonConfigPath[];
 	}
+
+	export type Cache = {
+		get: (from: string, to: string, content?: string) => loaders.MappedFileInfo;
+	}
+
 	export type WriteFileCallback = (fileName: string, data: string) => any;
 	export type PackageJsonConfigPath = string;
 	export type LoaderObject = {
 		extension: string;
-		after?: (currentProgram: Program) => any;
+		after?: (currentProgram: Program) => void;
 		parse: (fileName: string, to: string, content: string) => MappingFileInfo;
 		redirect?: Redirector;
 		emit?: (fileName: string, result: EmitResult, writeFile: WriteFileCallback) => any;

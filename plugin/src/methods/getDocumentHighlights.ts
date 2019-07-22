@@ -5,14 +5,16 @@ export function getDocumentHighlightsFactory(
     { handles, toRedirected, movePosition, mapDocumentHighlights }: Mappers
 ): LanguageService['getDocumentHighlights'] {
     return function (fileName: string, position: number, filesToSearch: string[]): DocumentHighlights[] | undefined {
-debugger;        if (handles(fileName)) {
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newPosition = movePosition(fileName, newFileName, position);
+            // TODO: https://github.com/Ventilador/ts-extras/issues/3
             filesToSearch = filesToSearch.map(file => handles(file) ? toRedirected(file) : file);
             const result = lang.getDocumentHighlights(newFileName, newPosition, filesToSearch);
             if (result && result.length) {
                 return result.map(i => mapDocumentHighlights(newFileName, fileName, i));
             }
+
             return result;
         }
 

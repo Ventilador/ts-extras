@@ -126,7 +126,7 @@ export function createHost(path: string, fs: fs.MemoryFileSystem): SolutionBuild
     }
     function resolveModuleNames(moduleNames: string[], containingFile: string, _reusedNames?: string[], redirectedReference?: ResolvedProjectReference) {
         const options = (configsByFile.get(normalizeSlashes(containingFile.toLowerCase())) || configFile).options;
-        return mapRootFiles(moduleNames, loaders, noop).map((moduleName) => {
+        return moduleNames.map((moduleName) => {
             return resolveModuleName(moduleName, containingFile, options, compilerHost, undefined, redirectedReference).resolvedModule!;
         });
     }

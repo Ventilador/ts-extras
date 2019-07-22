@@ -5,12 +5,13 @@ export function getCodeFixesAtPositionFactory(
     { mapCodeFixAction, handles, toRedirected, movePosition }: Mappers
 ): LanguageService['getCodeFixesAtPosition'] {
     return function (fileName: string, start: number, end: number, errorCodes: ReadonlyArray<number>, formatOptions: FormatCodeSettings, preferences: UserPreferences): ReadonlyArray<CodeFixAction> {
-debugger;        if (handles(fileName)) {
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const newStart = movePosition(fileName, newFileName, start);
             const newEnd = movePosition(fileName, newFileName, end);
             const result = lang.getCodeFixesAtPosition(newFileName, newStart, newEnd, errorCodes, formatOptions, preferences);
             if (result.length) {
+                debugger;
                 return result.map(i => mapCodeFixAction(newFileName, fileName, i));
             }
 

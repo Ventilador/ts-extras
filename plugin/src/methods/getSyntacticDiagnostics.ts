@@ -5,7 +5,7 @@ export function getSyntacticDiagnosticsFactory(
     { handles, toRedirected, mapDiagnosticWithLocation }: Mappers
 ): LanguageService['getSyntacticDiagnostics'] {
     return function (fileName: string): DiagnosticWithLocation[] {
-debugger;        if (handles(fileName)) {
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const result = lang.getSyntacticDiagnostics(newFileName);
             if (result.length) {

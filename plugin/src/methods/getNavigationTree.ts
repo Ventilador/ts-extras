@@ -4,7 +4,7 @@ export function getNavigationTreeFactory(
     lang: LanguageService,
     { handles, toRedirected, mapNavigationTree }: Mappers): LanguageService['getNavigationTree'] {
     return function (fileName: string): NavigationTree {
-debugger;        if (handles(fileName)) {
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const result = lang.getNavigationTree(newFileName);
             if (result) {

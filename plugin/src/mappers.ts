@@ -55,7 +55,7 @@ export interface Mappers extends loaders.ServerLoader {
 export function createMappers(loader: loaders.ServerLoader): Mappers {
     const { movePosition, moveFile, handles, wasRedirected, moveLineAndChar, toRedirected } = loader;
     const mapApplicableRefactorInfo = thru;
-    const mapCombinedCodeFixScope = thru;
+
     const mapImplementationLocation = thru;
     const mapJsxClosingTagInfo = thru;
     const mapLineAndCharacter = moveLineAndChar;
@@ -220,25 +220,8 @@ export function createMappers(loader: loaders.ServerLoader): Mappers {
             }),
         }
     }
-    function mapFileTextChanges(from: string, to: string, info: FileTextChanges): FileTextChanges {
-        if (handles(info.fileName)) {
-            from = info.fileName;
-            to = toRedirected(info.fileName);
 
 
-        } else {
-            const newFile = wasRedirected(info.fileName);
-            if (newFile) {
-                from = newFile;
-                to = info.fileName;
-            }
-        }
-        return {
-            fileName: moveFile(from, to, info.fileName),
-            isNewFile: info.isNewFile,
-            textChanges: info.textChanges.map(i => mapTextChange(from, to, i))
-        };
-    }
     function mapNavigateToItem(from: string, to: string, info: NavigateToItem): NavigateToItem {
         return {
             textSpan: mapTextSpan(from, to, info.textSpan),
@@ -313,14 +296,6 @@ export function createMappers(loader: loaders.ServerLoader): Mappers {
         }
     }
     function mapReferenceEntry(from: string, to: string, ref: ReferenceEntry): ReferenceEntry {
-        if (handles(ref.fileName)) {
-            from = ref.fileName;
-            to = toRedirected(ref.fileName);
-        } else if (from = wasRedirected(ref.fileName) as any) {
-            to = ref.fileName;
-        } else {
-            return ref;
-        }
         return {
             fileName: moveFile(from, to, ref.fileName),
             isDefinition: ref.isDefinition,
@@ -434,6 +409,49 @@ export function createMappers(loader: loaders.ServerLoader): Mappers {
         }
     }
 
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    /*--------------------------------------------------------------------------------------------------------------------------------------------*/
+    function mapFileTextChanges(from: string, to: string, info: FileTextChanges): FileTextChanges {
+        if (handles(info.fileName)) {
+            from = toRedirected(info.fileName);
+            to = info.fileName;
+            return {
+                fileName: moveFile(from, to, info.fileName),
+                isNewFile: info.isNewFile,
+                textChanges: info.textChanges.map(i => mapTextChange(from, to, i))
+            };
+        } else {
+            const redirectedFrom = wasRedirected(info.fileName);
+            if (redirectedFrom) {
+                from = info.fileName;
+                to = redirectedFrom;
+                return {
+                    fileName: moveFile(from, to, info.fileName),
+                    isNewFile: info.isNewFile,
+                    textChanges: info.textChanges.map(i => mapTextChange(from, to, i))
+                };
+            }
+        }
+
+        return info;
+
+    }
+
+    function mapCombinedCodeFixScope(_from: string, _to: string, scope: CombinedCodeFixScope): CombinedCodeFixScope {
+        if (handles(scope.fileName)) {
+            return {
+                fileName: toRedirected(scope.fileName),
+                type: scope.type
+            }
+        }
+
+        return scope;
+    }
 }
 
 

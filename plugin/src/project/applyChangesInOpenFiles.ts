@@ -2,11 +2,13 @@ import { server, ScriptKind, TextChange, SyntaxKind } from "typescript/lib/tsser
 import { Mappers } from "../mappers";
 import { createFs } from "@ts-extras/mem-fs";
 import { fs } from "@ts-extras/types";
+import { ServerCache } from "../loaderCache";
 export type ApplyChangesInOpenFiles = (this: server.ProjectService, openFiles: Iterator<OpenFileArguments> | undefined, changedFiles?: Iterator<ChangeFileArguments>, closedFiles?: string[]) => any;
 
 export function applyChangesInOpenFilesFactory(
     orig: ApplyChangesInOpenFiles,
-    { handles, redirect, parse, mapTextChange }: Mappers,
+    { handles, redirect, mapTextChange, wasRedirected }: Mappers,
+    { applyChange, get }: ServerCache
 ): ApplyChangesInOpenFiles {
     const fs = createFs(process.cwd(), true);
     let existingOpenedFiles: ts.Map<server.NormalizedPath | undefined> = null as any;
@@ -37,8 +39,14 @@ export function applyChangesInOpenFilesFactory(
             if (handles(openedFile.fileName)) {
                 redirect(openedFile.fileName, (from, to) => openFile(prev, from, to, openedFile))
             }
+
             if (!hasItem(openedFile.fileName)) {
-                prev.set(openedFile.fileName, openedFile);
+                const redirected = wasRedirected(openedFile.fileName);
+                if (redirected) {
+                    openFile(prev, redirected, openedFile.fileName, openedFile)
+                } else {
+                    prev.set(openedFile.fileName, openedFile);
+                }
             }
             return prev;
         }, new Map<string, OpenFileArguments>()).values();
@@ -48,25 +56,24 @@ export function applyChangesInOpenFilesFactory(
         if (handles(to) || hasItem(to)) {
             return;
         }
-        const newContent = readContent(from, to, openedFile.content!);
-        fs.writeVirtualFile(from, to, readContent);
+
         prev.set(to, {
-            content: newContent,
+            content: readContent(from, to, openedFile.content!),
             fileName: to,
             hasMixedContent: false,
             scriptKind: ScriptKind.TS,
-            projectRootPath: openedFile.projectRootPath + '/ax-workbench/gui'
+            projectRootPath: openedFile.projectRootPath ? openedFile.projectRootPath + '/ax-workbench/gui' : undefined
         });
     }
 
     function readContent(from: string, to: string, content: string) {
-        return parse(from, to, content).newText;
+        return get(from, to, content).newText;
     }
 
     function patchChangedFiles(changing: Iterator<ChangeFileArguments>) {
         return iteratorToArray(changing).reduce((prev, changedFile) => {
             if (handles(changedFile.fileName)) {
-                redirect(changedFile.fileName, (from, to) => addChange(prev, to, mapIterator(changedFile.changes, i => mapTextChange(from, to, i))))
+                redirect(changedFile.fileName, (from, to) => addChange(prev, to, mapIterator(changedFile.changes, i => mapChangeAndSaveIt(from, to, i))))
             }
             if (hasItem(changedFile.fileName)) {
                 prev.set(changedFile.fileName, changedFile);
@@ -75,10 +82,17 @@ export function applyChangesInOpenFilesFactory(
         }, new Map<string, ChangeFileArguments>()).values();
     }
 
-    function addChange(prev: Map<string, ChangeFileArguments>, fileName: string, changes: Iterator<TextChange>) {
-        if (hasItem(fileName)) {
-            prev.set(fileName, {
-                fileName: fileName,
+
+
+    function mapChangeAndSaveIt(from: string, to: string, change: TextChange) {
+        applyChange(from, to, change);
+        return mapTextChange(from, to, change);
+    }
+
+    function addChange(prev: Map<string, ChangeFileArguments>, to: string, changes: Iterator<TextChange>) {
+        if (hasItem(to)) {
+            prev.set(to, {
+                fileName: to,
                 changes: changes
             });
         }
@@ -97,19 +111,6 @@ export function applyChangesInOpenFilesFactory(
     function hasItem(item: string) {
         return existingOpenedFiles.has(item.toLowerCase());
     }
-
-}
-const cache = Object.create(null) as Record<string, string>;
-function findTsConfig(fs: fs.MemoryFileSystem, path: string) {
-    path = path.toLowerCase();
-    if (cache[path]) {
-        return cache[path];
-    }
-
-    // return cache[path] = findConfig(fs, path);
-}
-
-function findConfig() {
 
 }
 
@@ -133,8 +134,6 @@ function mapIterator<T, U>(iter: Iterator<T>, mapFn: (x: T) => U): Iterator<U> {
         }
     };
 }
-
-
 
 export interface OpenFileArguments {
     fileName: string;

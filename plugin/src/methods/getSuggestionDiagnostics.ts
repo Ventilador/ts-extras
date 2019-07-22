@@ -5,10 +5,11 @@ export function getSuggestionDiagnosticsFactory(
     { handles, toRedirected, mapDiagnosticWithLocation }: Mappers
 ): LanguageService['getSuggestionDiagnostics'] {
     return function (fileName: string): DiagnosticWithLocation[] {
-debugger;        if (handles(fileName)) {
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             const result = lang.getSuggestionDiagnostics(newFileName);
             if (result.length) {
+                debugger;
                 return result.map(i => mapDiagnosticWithLocation(newFileName, fileName, i));
             }
             return result;

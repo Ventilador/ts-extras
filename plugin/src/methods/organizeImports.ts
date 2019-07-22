@@ -5,7 +5,7 @@ export function organizeImportsFactory(
     { handles, mapCombinedCodeFixScope, toRedirected, mapFileTextChanges }: Mappers,
 ): LanguageService['organizeImports'] {
     return function (scope: OrganizeImportsScope, formatOptions: FormatCodeSettings, preferences: UserPreferences | undefined): ReadonlyArray<FileTextChanges> {
-debugger;        if (handles(scope.fileName)) {
+        if (handles(scope.fileName)) {
             const newFileName = toRedirected(scope.fileName);
             scope = mapCombinedCodeFixScope(scope.fileName, newFileName, scope);
             const result = lang.organizeImports(scope, formatOptions, preferences);

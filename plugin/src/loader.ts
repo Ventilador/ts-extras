@@ -16,9 +16,10 @@ export default function (loader: loaders.LoaderExport) {
         return { create, getExternalFiles };
     };
     function create(info: tsLib.server.PluginCreateInfo) {
-        const serverLoaders = createServerLoader(loader, addCacheSyncronization(baseLoader, info.project));
+        const cache = addCacheSyncronization(info.project, baseLoader);
+        const serverLoaders = createServerLoader(baseLoader, cache);
         const mappers = createMappers(serverLoaders);
-        patchProject(info.project.projectService, mappers);
+        patchProject(info.project.projectService, mappers, cache);
         patchFsLikeMethods(info.serverHost, info.project.projectName, mappers);
         extFiles = readExtFiles(fs, info, serverLoaders);
         return createService(info.languageService, Object.keys(info.languageService) as any, mappers);

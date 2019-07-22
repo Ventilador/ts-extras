@@ -1,5 +1,4 @@
 import { FileWatcherCallback, FileWatcherEventKind, server, DirectoryWatcherCallback } from "typescript/lib/tsserverlibrary";
-import { fs } from "@ts-extras/types";
 import { createFs } from '@ts-extras/mem-fs';
 import { Mappers } from "./mappers";
 

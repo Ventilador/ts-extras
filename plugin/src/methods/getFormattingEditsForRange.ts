@@ -5,8 +5,7 @@ export function getFormattingEditsForRangeFactory(
     { handles, toRedirected, movePositionWithinFile, mapTextChange }: Mappers
 ): LanguageService['getFormattingEditsForRange'] {
     return function (fileName: string, start: number, end: number, options: FormatCodeOptions | FormatCodeSettings): TextChange[] {
-debugger;        if (handles(fileName)) {
-
+        if (handles(fileName)) {
             const newFileName = toRedirected(fileName);
             let result: TextChange[];
             const newStart = movePositionWithinFile(fileName, newFileName, start);
