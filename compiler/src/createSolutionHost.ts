@@ -125,15 +125,34 @@ export function createHost(path: string, fs: fs.MemoryFileSystem): SolutionBuild
         reportDiagnostic(diagnostic);
     }
     function resolveModuleNames(moduleNames: string[], containingFile: string, _reusedNames?: string[], redirectedReference?: ResolvedProjectReference) {
-        const options = (configsByFile.get(normalizeSlashes(containingFile.toLowerCase())) || configFile).options;
+        const options = findByFolder(containingFile);
         return moduleNames.map((moduleName) => {
             return resolveModuleName(moduleName, containingFile, options, compilerHost, undefined, redirectedReference).resolvedModule!;
         });
     }
     function resolveTypeReferenceDirectives(typeReferenceDirectiveNames: string[], containingFile: string): ResolvedTypeReferenceDirective[] {
+        const options = findByFolder(containingFile);
         return typeReferenceDirectiveNames.map((i) => {
-            return resolveTypeReferenceDirective(i, containingFile, configFile.options, fs).resolvedTypeReferenceDirective!;
+            return resolveTypeReferenceDirective(i, containingFile, options, fs).resolvedTypeReferenceDirective!;
         });
+    }
+    function findByFolder(path: string) {
+        let newPath = normalizeSlashes(path.toLowerCase());
+        if (configsByFile.has(newPath)) {
+            return configsByFile.get(newPath)!.options;
+        }
+
+        if (newPath.includes('infer')) {
+            newPath = dirname(newPath);
+            configsByFile.forEach((value, key) => {
+                if (key.startsWith(newPath)) {
+                    newPath = key;
+                    configsByFile.set(newPath, value);
+                }
+            });
+        }
+
+        return (configsByFile.get(newPath) || configFile).options!;
     }
 }
 function useCaseSensitiveFileNames() { return true; }

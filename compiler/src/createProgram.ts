@@ -28,23 +28,26 @@ function createWriteFileWithLoaders(fileLoaders: loaders.CompilerLoader[], write
         writeFile, flush
     }
     function writeFile(fileName: string, content: string) {
+        let shouldAdd = true;
         for (const loader of fileLoaders) {
             let originatingFileName: string | false;
             if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.JS, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.JsFile);
-
+                shouldAdd = false;
             } else if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.DTS, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.DTsFile);
-
+                shouldAdd = false;
             } else if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.MAP, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.MapFile);
-
+                shouldAdd = false;
             } else if (originatingFileName = loader.wasRedirectedFrom(loaders.TypescriptExtension.DTSMAP, fileName)) {
                 add(loader, originatingFileName, fileName, content, Extensions.DTsMapFile);
-
+                shouldAdd = false;
             }
         }
-        writeFileToDisk(fileName, content);
+        if (shouldAdd) {
+            writeFileToDisk(fileName, content);
+        }
     }
     function flush() {
         cache.forEach(function (val, key) {

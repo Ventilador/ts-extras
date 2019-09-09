@@ -1,4 +1,4 @@
-import { createSolutionBuilder } from 'typescript';
+import { createSolutionBuilder, ExitStatus } from 'typescript';
 import { createFs } from '@ts-extras/mem-fs';
 import { createHost } from './createSolutionHost';
 import { dirname } from 'path';
@@ -9,8 +9,10 @@ export default function (tsConfigPath: string, watch: boolean) {
     const programHost = createHost(tsConfigPath, fs);
     const rootFiles = [tsConfigPath];
     const builder = createSolutionBuilder(programHost, rootFiles, getBuildOptions(watch));
-    builder.buildAllProjects();
+    const status = builder.buildAllProjects();
     if (watch) {
         builder.startWatching();
+    } else if (status !== ExitStatus.Success) {
+        process.exit(1);
     }
 }
